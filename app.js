@@ -17,6 +17,7 @@
     spot: 'اكشف التلاعب',
     cases: 'القضايا التفاعلية',
     lab: 'مختبر العقل',
+    cyber: 'الأمن السيبراني والمختبر العملي',
     quiz: 'اختبر ملاحظتك',
     library: 'مكتبة الكتب',
     notes: 'دفتر التأمل',
@@ -451,6 +452,290 @@
       '<div class="bias-demo" style="margin-top:16px"><button class="bias-choice" data-bias="confirm"><strong>أبحث عما يؤكد اعتقادي</strong><span>أجمع المواقف التي لم يشارك فيها فقط.</span></button><button class="bias-choice" data-bias="challenge"><strong>أبحث عن صورة كاملة</strong><span>أراجع أمثلة أخرى وأسأله عن رأيه وظروفه.</span></button></div><div id="biasResult" class="case-result" style="display:none"></div></div>';
   }
 
+  const cyberModules = [
+    {
+      title: 'أساسيات الأمن السيبراني', level: 'مبتدئ', time: '35 دقيقة',
+      intro: 'افهم ما الذي نحميه، ممّن نحميه، وما احتمال الضرر قبل اختيار الأدوات.',
+      lessons: [
+        'الأصول: الحسابات والملفات والأجهزة والخدمات والسمعة والخصوصية.',
+        'التهديد: حدث أو جهة أو ظرف قد يسبب ضرراً؛ والثغرة: ضعف يمكن استغلاله.',
+        'المخاطر تجمع بين احتمال الحدوث وحجم الأثر، وليست كل ثغرة خطراً متساوياً.',
+        'السرية: منع الوصول غير المصرح به. السلامة: منع التعديل غير المصرح به. التوافر: بقاء الخدمة متاحة.',
+        'مثال: فقدان هاتف عمل قد يهدد سرية الرسائل وتوافر الحساب؛ التشفير والقفل والنسخ الاحتياطي تقلل الأثر.'
+      ],
+      exercise: 'اختر ملفاً مهماً لديك، وحدد قيمته، ومن يحتاج إليه، وما الذي قد يحدث لو فُقد أو كُشف أو عُدّل.'
+    },
+    {
+      title: 'الشبكات والإنترنت', level: 'مبتدئ', time: '50 دقيقة',
+      intro: 'تعلم كيف تنتقل البيانات وما الأدوار التي تلعبها العناوين والبروتوكولات والخدمات.',
+      lessons: [
+        'عنوان IP يعرّف واجهة شبكة ضمن نطاق معيّن؛ وDNS يحوّل أسماء النطاقات إلى عناوين.',
+        'TCP يوفر اتصالاً موثوقاً ومرتباً، بينما UDP يركز على إرسال خفيف دون ضمان التسليم نفسه.',
+        'المنافذ تميّز الخدمات داخل الجهاز؛ رقم المنفذ وحده لا يثبت أن الخدمة آمنة أو خطرة.',
+        'HTTP ينقل محتوى الويب، وHTTPS يستخدم TLS لحماية النقل والتحقق من هوية الخادم وفق الشهادة.',
+        'الجدار الناري يطبق قواعد مرور، وVPN ينشئ نفقاً مشفراً إلى نقطة أخرى ولا يجعل المستخدم مجهولاً تلقائياً.'
+      ],
+      exercise: 'ارسم مسار زيارة موقع: المتصفح ← DNS ← عنوان الخادم ← اتصال TLS ← طلب HTTP واستجابة الخادم.'
+    },
+    {
+      title: 'حماية الحسابات والهوية', level: 'مبتدئ', time: '40 دقيقة',
+      intro: 'الحسابات غالباً بوابة الوصول إلى البريد والملفات والخدمات الأخرى.',
+      lessons: [
+        'استخدم كلمة مرور فريدة لكل خدمة، ويفضل حفظها في مدير كلمات مرور موثوق.',
+        'فعّل المصادقة متعددة العوامل، ويفضل مفاتيح المرور أو مفاتيح الأمان عند توفرها.',
+        'رمز الاسترداد ورمز التحقق وكلمة المرور أسرار؛ لا تشاركها مع أي شخص.',
+        'طبّق مبدأ أقل صلاحية: لا تمنح الحساب أو التطبيق إلا ما يحتاج إليه.',
+        'راجع الجلسات النشطة والتطبيقات المتصلة وطرق الاسترداد بصورة دورية.'
+      ],
+      exercise: 'أنشئ قائمة بحساباتك المهمة وحدد لكل منها: المصادقة الثنائية، وسيلة الاسترداد، وآخر مراجعة للجلسات.'
+    },
+    {
+      title: 'التشفير والهاش', level: 'متوسط', time: '55 دقيقة',
+      intro: 'التشفير يحمي سرية البيانات بمفتاح، أما الهاش فينتج بصمة ثابتة الطول للتحقق والمقارنة.',
+      lessons: [
+        'التشفير المتماثل يستخدم مفتاحاً سرياً مشتركاً؛ وغير المتماثل يستخدم زوج مفاتيح عامة وخاصة.',
+        'خوارزميات الهاش مثل SHA-256 أحادية الاتجاه عملياً، وتستخدم للتحقق من سلامة الملفات.',
+        'كلمات المرور لا تخزن كنص صريح ولا يكفي استخدام SHA-256 وحده؛ تستخدم خوارزميات مخصصة بطيئة مثل Argon2id أو scrypt أو bcrypt مع salt.',
+        'TLS يحمي البيانات أثناء انتقالها، لكن لا يمنع البرمجيات الخبيثة أو مشاركة البيانات من طرف مخوّل.',
+        'إدارة المفاتيح وتدويرها وحمايتها لا تقل أهمية عن اختيار الخوارزمية.'
+      ],
+      exercise: 'استخدم مختبر البصمة أدناه على نص تجريبي، ثم غيّر حرفاً واحداً ولاحظ كيف تتغير البصمة.'
+    },
+    {
+      title: 'أمن المواقع والتطبيقات', level: 'متوسط', time: '70 دقيقة',
+      intro: 'افهم الأخطاء الشائعة في التطبيقات وكيف يمنعها التصميم الآمن والاختبار المصرح به.',
+      lessons: [
+        'التحكم بالوصول المكسور: يرى المستخدم بيانات أو وظائف لا تخصه. تحقق من الصلاحية في الخادم لكل طلب.',
+        'حقن الأوامر أو SQL Injection يحدث عندما تدمج مدخلات المستخدم داخل استعلام أو أمر بطريقة غير آمنة. استخدم الاستعلامات المعلّمة والمعاملات.',
+        'XSS يسمح بتفسير مدخل غير موثوق ككود داخل المتصفح. استخدم الترميز المناسب وواجهات DOM الآمنة وسياسة CSP.',
+        'CSRF يستغل جلسة موثوقة لتنفيذ طلب غير مقصود. استخدم رموز الحماية وSameSite والتحقق من المصدر بحسب التصميم.',
+        'SSRF قد يجعل الخادم يطلب موارد داخلية نيابة عن مستخدم. قيّد الوجهات والتحويلات، ولا تعتمد على قائمة حظر سطحية.',
+        'تحقق من الملفات المرفوعة، وحجمها ونوعها ومحتواها وموضع تخزينها وصلاحية الوصول إليها.'
+      ],
+      exercise: 'راجع نموذج تسجيل دخول تجريبي: هل توجد صلاحية على الخادم؟ هل المدخلات معلمة؟ هل رسائل الخطأ تكشف معلومات؟'
+    },
+    {
+      title: 'التصيّد والهندسة الاجتماعية', level: 'مبتدئ', time: '35 دقيقة',
+      intro: 'تستغل رسائل الاحتيال الاستعجال والثقة والخوف والرغبة في المكافأة.',
+      lessons: [
+        'افحص اسم المرسل والنطاق الفعلي، لا الاسم الظاهر وحده.',
+        'انتبه لطلبات السرية والعجلة وتحديث بيانات الدفع أو مشاركة رمز التحقق.',
+        'مرّر المؤشر على الرابط أو افحص عنوانه دون فتحه، واستخدم قناة مستقلة للتحقق.',
+        'المرفق غير المتوقع قد يحمل خطراً حتى لو بدا أن الرسالة من شخص تعرفه.',
+        'بلّغ عن الرسالة وفق سياسة المؤسسة، ولا تعِد إرسال الرابط للآخرين.'
+      ],
+      exercise: 'حلّل عينات الرسائل في المختبر، وحدد الإشارات التي جعلتك تتوقف قبل الضغط.'
+    },
+    {
+      title: 'أنظمة التشغيل والأجهزة', level: 'متوسط', time: '50 دقيقة',
+      intro: 'الأمن يبدأ من تحديث النظام وتقليل سطح الهجوم والتحكم في البرامج والصلاحيات.',
+      lessons: [
+        'ثبّت تحديثات النظام والمتصفح والتطبيقات من مصادرها الرسمية.',
+        'احذف البرامج غير اللازمة، وراجع إضافات المتصفح وأذوناتها.',
+        'استخدم حساباً يومياً محدود الصلاحيات، واحتفظ بحساب إداري منفصل عند الحاجة.',
+        'فعّل قفل الشاشة وتشفير القرص وحماية الجهاز من السرقة عند توفرها.',
+        'لا توصل وحدات USB مجهولة، ولا تشغّل ملفات تنفيذية لمجرد أن اسمها أو أيقونتها مألوف.'
+      ],
+      exercise: 'افتح إعدادات جهازك وسجّل إصدار النظام، حالة التحديث، تشفير القرص، وقائمة التطبيقات التي لم تعد تحتاج إليها.'
+    },
+    {
+      title: 'السجلات والمراقبة', level: 'متوسط', time: '45 دقيقة',
+      intro: 'السجلات تساعد على بناء تسلسل زمني وفهم ما حدث، لكنها تحتاج إلى حماية وسياق.',
+      lessons: [
+        'سجلات الدخول تسجل النجاح والفشل ووقت الحدث والجهاز أو المصدر بحسب النظام.',
+        'تكرار فشل الدخول قد يكون خطأ مستخدم أو خدمة قديمة أو محاولة غير مصرح بها؛ لا تقفز إلى استنتاج.',
+        'وحّد التوقيت واحمِ السجلات من العبث، وحدد مدة الاحتفاظ المناسبة.',
+        'اربط التنبيه بخطورة الأصل والأثر واحتمال الحدوث لتقليل الإنذارات الكاذبة.',
+        'لا تسجل كلمات المرور أو رموز الجلسات أو بيانات حساسة داخل السجلات.'
+      ],
+      exercise: 'شغّل محلل السجلات التجريبية بالأسفل وحدد أي الحسابات تحتاج إلى مراجعة.'
+    },
+    {
+      title: 'الاستجابة للحوادث والنسخ الاحتياطي', level: 'متقدم', time: '60 دقيقة',
+      intro: 'عند وقوع حادث، الأولوية لاحتواء الضرر وحفظ الأدلة واستعادة التشغيل بأمان.',
+      lessons: [
+        'حضّر خطة اتصال ومسؤوليات واضحة قبل الحادث.',
+        'حدد النطاق والأصول المتأثرة، واعزل الجهاز عند الحاجة دون إتلاف الأدلة.',
+        'احتفظ بالتوقيت والسجلات والنسخ الأصلية، وسجّل كل إجراء اتخذته.',
+        'استعد من نسخة احتياطية سليمة ومختبرة، ثم حدّث الأنظمة وغيّر الأسرار المتأثرة.',
+        'راجع السبب الجذري والدروس المستفادة، وحدّث الضوابط لمنع التكرار.'
+      ],
+      exercise: 'اكتب خطة استجابة من خمس خطوات لسيناريو فقدان هاتف عمل يحوي بريداً وملفات.'
+    },
+    {
+      title: 'الاختبار الأخلاقي والقانوني', level: 'متقدم', time: '40 دقيقة',
+      intro: 'أي اختبار أمني يتطلب تفويضاً واضحاً ونطاقاً محدداً وقواعد توقف وتقريراً مسؤولاً.',
+      lessons: [
+        'لا تختبر نظاماً أو حساباً أو شبكة لا تملكها أو لا تملك تفويضاً مكتوباً لاختبارها.',
+        'حدد النطاق والأهداف والفترة والأنظمة المستثناة وحدود التأثير قبل أي عمل.',
+        'ابدأ بمراجعة الإعدادات والشفرة والنسخ التجريبية قبل أي اختبار نشط.',
+        'وثّق الأثر والدليل وخطوات إعادة الإنتاج الآمنة والتوصية العلاجية.',
+        'أوقف الاختبار فوراً عند ظهور بيانات حقيقية أو تأثير غير متوقع أو خروج عن النطاق.'
+      ],
+      exercise: 'اكتب نموذج إذن اختبار يتضمن اسم المالك، الأنظمة المسموح بها، المدة، حدود الاختبار، وجهة الإبلاغ.'
+    }
+  ];
+
+  const phishingSamples = [
+    {
+      title: 'رسالة فوز مشبوهة',
+      message: 'مبروك! ربحت هاتفاً جديداً. أكد بياناتك خلال 10 دقائق عبر الرابط short.example/claim أو ستخسر الجائزة.',
+      indicators: ['جائزة غير متوقعة', 'مهلة قصيرة وضغط للاستعجال', 'رابط مختصر لا يوضح الجهة', 'طلب بيانات قبل التحقق'],
+      conclusion: 'توقف ولا تفتح الرابط. تحقق من الجهة عبر موقعها أو رقمها الرسمي الذي تعرفه مسبقاً.'
+    },
+    {
+      title: 'تنبيه حساب مزيف',
+      message: 'سيتم إيقاف بريدك الآن. أرسل كلمة المرور ورمز التحقق إلى support@example.invalid حتى لا تفقد ملفاتك.',
+      indicators: ['تهديد بإيقاف فوري', 'طلب كلمة المرور ورمز التحقق', 'عنوان دعم غير موثّق', 'لا توجد قناة تحقق مستقلة'],
+      conclusion: 'لا تشارك كلمة المرور أو رمز التحقق أبداً. افتح التطبيق الرسمي بنفسك وافحص التنبيهات من داخله.'
+    },
+    {
+      title: 'فاتورة متوقعة لكن تحتاج تحققاً',
+      message: 'مرحباً، هذه فاتورة اشتراكك الشهري. يمكنك مراجعة التفاصيل من التطبيق الرسمي كالمعتاد. لا نطلب منك كلمة المرور أو رمز التحقق عبر البريد.',
+      indicators: ['الرسالة متوقعة بحسب السياق', 'لا تطلب أسرار الدخول', 'تحيل إلى التطبيق الرسمي دون رابط مجهول'],
+      conclusion: 'قد تكون سليمة، لكن لا تعتمد على النص وحده. افتح التطبيق الرسمي مباشرة وتحقق من الفاتورة هناك.'
+    }
+  ];
+
+  const demoLogs = [
+    '2026-10-12T08:00:01Z user=amina result=success src=192.0.2.44',
+    '2026-10-12T08:02:10Z user=admin result=failed src=198.51.100.27',
+    '2026-10-12T08:02:12Z user=admin result=failed src=198.51.100.27',
+    '2026-10-12T08:02:15Z user=admin result=failed src=198.51.100.27',
+    '2026-10-12T08:02:19Z user=admin result=failed src=198.51.100.27',
+    '2026-10-12T08:05:00Z user=seif result=success src=192.0.2.18',
+    '2026-10-12T08:06:30Z user=amina result=failed src=203.0.113.8',
+    '2026-10-12T08:06:42Z user=amina result=success src=203.0.113.8'
+  ];
+
+  function cyberPage() {
+    return sectionHeading('مسار تعليمي مستقل • دفاع وتوعية', 'الأمن السيبراني والمختبر العملي', 'من المبادئ الأساسية إلى تحليل الحوادث وأمن التطبيقات. تعلّم المفاهيم، ثم جرّب الأدوات على عينات محلية مصطنعة لا تتصل بأجهزة أو مواقع خارجية.') +
+      '<div class="cyber-warning"><span>⚑</span><div><strong>قواعد المختبر الآمن</strong><p>كل العينات هنا خيالية ومحلية. لا تدخل كلمات مرورك الحقيقية، ولا تستخدم الأدوات على أنظمة لا تملكها أو لا تملك إذناً مكتوباً لاختبارها.</p></div></div>' +
+      '<div class="cyber-stats"><div><b>' + cyberModules.length + '</b><span>مسارات تعلّم</span></div><div><b>6</b><span>تجارب محلية</span></div><div><b>0</b><span>طلبات إلى أهداف خارجية</span></div></div>' +
+      '<div class="section-row"><div><h2 class="section-title">خريطة المعرفة</h2><div class="section-sub">من الصفر إلى بناء خطة دفاعية متكاملة</div></div></div>' +
+      '<div class="cyber-module-grid">' + cyberModules.map((module, index) =>
+        '<details class="cyber-module" ' + (index === 0 ? 'open' : '') + '><summary><span class="cyber-module-number">' + String(index + 1).padStart(2, '0') + '</span><span class="cyber-module-main"><strong>' + module.title + '</strong><small>' + module.level + ' • ' + module.time + '</small></span><span class="cyber-expand">＋</span></summary>' +
+        '<div class="cyber-module-body"><p>' + module.intro + '</p><ul>' + module.lessons.map(lesson => '<li>' + lesson + '</li>').join('') + '</ul><div class="cyber-exercise"><strong>تطبيق مقترح</strong><p>' + module.exercise + '</p></div></div></details>'
+      ).join('') + '</div>' +
+      '<div class="section-row"><div><h2 class="section-title">المختبرات التفاعلية</h2><div class="section-sub">الأدوات تعمل محلياً داخل هذه الصفحة باستخدام بيانات تجريبية</div></div></div>' +
+      '<div class="cyber-labs">' +
+      '<section class="cyber-lab-card"><div class="cyber-lab-top"><span class="cyber-lab-id">LAB 01</span><span class="tag">بصمة رقمية</span></div><h3>مختبر SHA-256</h3><p>حوّل نصاً تجريبياً إلى بصمة ثابتة الطول. جرّب تغيير حرف واحد ولاحظ اختلاف الناتج. هذا هاش للتعلم، وليس تخزيناً آمناً لكلمات المرور.</p><textarea id="hashInput" class="cyber-input" rows="2" placeholder="اكتب نصاً تجريبياً غير حساس..."></textarea><button class="primary-btn" id="runHash">احسب البصمة</button><div class="cyber-output" id="hashOutput" aria-live="polite">ستظهر البصمة هنا.</div></section>' +
+      '<section class="cyber-lab-card"><div class="cyber-lab-top"><span class="cyber-lab-id">LAB 02</span><span class="tag">حماية الحساب</span></div><h3>مقياس قوة عبارة مرور تجريبية</h3><p>أدخل عبارة عشوائية للتجربة فقط. لا تستخدم كلمة مرور حقيقية أو كلمة تستخدمها في أي حساب. المعاينة محلية ولا تُحفظ.</p><input id="passwordDemo" class="cyber-input" type="password" autocomplete="off" placeholder="عبارة مرور تجريبية فقط"><button class="secondary-btn" id="runPassword">حلّل العبارة</button><div class="cyber-meter"><span id="passwordMeter"></span></div><div class="cyber-output" id="passwordOutput" aria-live="polite">لن تظهر أي نتيجة قبل الضغط على التحليل.</div></section>' +
+      '<section class="cyber-lab-card"><div class="cyber-lab-top"><span class="cyber-lab-id">LAB 03</span><span class="tag">التصيّد</span></div><h3>محلل رسائل مشبوهة</h3><p>اختر رسالة مصطنعة، واكتشف العلامات التي تستحق التوقف والتحقق.</p><select id="phishingSample" class="cyber-input">' + phishingSamples.map((sample, i) => '<option value="' + i + '">' + sample.title + '</option>').join('') + '</select><button class="secondary-btn" id="runPhishing">حلّل الرسالة</button><div class="cyber-output" id="phishingOutput" aria-live="polite">اختر عينة لعرض مؤشرات التحقق.</div></section>' +
+      '<section class="cyber-lab-card"><div class="cyber-lab-top"><span class="cyber-lab-id">LAB 04</span><span class="tag">تحليل السجلات</span></div><h3>محلل محاولات الدخول</h3><p>حلّل سجلات دخول خيالية. العناوين من نطاقات توثيقية مخصصة للأمثلة، ولا تمثل أجهزة حقيقية.</p><div class="cyber-log-preview">' + demoLogs.map(line => '<code>' + line + '</code>').join('') + '</div><button class="secondary-btn" id="runLogs">حلّل السجلات</button><div class="cyber-output" id="logsOutput" aria-live="polite">اضغط لتحليل محاولات الدخول.</div></section>' +
+      '<section class="cyber-lab-card"><div class="cyber-lab-top"><span class="cyber-lab-id">LAB 05</span><span class="tag">فحص الرابط</span></div><h3>فاحص بنية URL</h3><p>يفحص تركيب الرابط محلياً دون فتحه أو الاتصال بالموقع. استخدم روابط توضيحية فقط.</p><input id="urlDemo" class="cyber-input" type="text" placeholder="https://example.com/account"><button class="secondary-btn" id="runUrl">افحص التركيب</button><div class="cyber-output" id="urlOutput" aria-live="polite">لن يتم فتح الرابط أو طلب بيانات منه.</div></section>' +
+      '<section class="cyber-lab-card"><div class="cyber-lab-top"><span class="cyber-lab-id">LAB 06</span><span class="tag">أمن قواعد البيانات</span></div><h3>محاكاة الإدخال الآمن</h3><p>محاكاة تعليمية لتوضيح لماذا يجب فصل بيانات المستخدم عن أوامر قاعدة البيانات. لا توجد قاعدة بيانات حقيقية خلف هذا النموذج.</p><input id="sqlDemo" class="cyber-input" type="text" placeholder="جرّب اسماً عادياً أو نصاً تجريبياً..."><button class="secondary-btn" id="runSql">قارن طريقتي المعالجة</button><div class="cyber-output" id="sqlOutput" aria-live="polite">ستظهر مقارنة بين دمج النص والاستعلام المعلّم.</div></section>' +
+      '</div>' +
+      '<div class="panel cyber-roadmap"><div class="panel-kicker">المشروع النهائي</div><h3>أنشئ خطة حماية رقمية شخصية</h3><p>اجمع بين مدير كلمات مرور، ومصادقة متعددة العوامل، وتحديثات منتظمة، ونسخ احتياطي مجرّب، وحماية الجهاز، ومراجعة خصوصية التطبيقات، وخطة استجابة عند فقدان الحساب.</p><button class="text-link" data-go="notes">دوّن خطة الحماية في دفتر التأمل ←</button></div>';
+  }
+
+  function escapeCyberText(value) {
+    return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  }
+
+  async function runHashLab() {
+    const input = $('#hashInput');
+    const output = $('#hashOutput');
+    if (!input || !output) return;
+    if (!input.value.trim()) { output.textContent = 'اكتب نصاً تجريبياً أولاً.'; return; }
+    if (!window.crypto || !crypto.subtle || !window.TextEncoder) {
+      output.textContent = 'ميزة Web Crypto غير متاحة في هذا السياق. افتح التطبيق عبر HTTPS أو متصفح حديث.';
+      return;
+    }
+    output.textContent = 'جارٍ الحساب محلياً...';
+    try {
+      const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input.value));
+      const hex = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+      output.innerHTML = '<strong>SHA-256 • 256 bit</strong><code class="cyber-hash">' + hex + '</code><small>البصمة ليست تشفيراً قابلاً للفك. لا تستخدم SHA-256 وحده لتخزين كلمات المرور.</small>';
+    } catch (error) {
+      output.textContent = 'تعذر إنشاء البصمة في هذا المتصفح.';
+    }
+  }
+
+  function runPasswordLab() {
+    const value = $('#passwordDemo')?.value || '';
+    const output = $('#passwordOutput');
+    const meter = $('#passwordMeter');
+    if (!output || !meter) return;
+    if (!value) { output.textContent = 'أدخل عبارة تجريبية أولاً.'; meter.style.width = '0%'; return; }
+    let pool = 0;
+    if (/[a-z]/.test(value)) pool += 26;
+    if (/[A-Z]/.test(value)) pool += 26;
+    if (/[0-9]/.test(value)) pool += 10;
+    if (/[^A-Za-z0-9]/.test(value)) pool += 32;
+    const estimate = value.length * Math.log2(Math.max(pool, 1));
+    let score = 0;
+    if (value.length >= 12) score++;
+    if (value.length >= 16) score++;
+    if (pool >= 62) score++;
+    if (pool >= 80) score++;
+    if (!/(.)\1{2,}/.test(value)) score++;
+    const pct = Math.min(100, score * 20);
+    meter.style.width = pct + '%';
+    const label = score <= 1 ? 'ضعيفة' : score <= 3 ? 'متوسطة' : 'أفضل نسبياً';
+    output.innerHTML = '<strong>التقييم التقريبي: ' + label + '</strong><p>الطول: ' + value.length + ' محرفاً • تنوع الفئات: ' + pool + ' رمزاً تقريبياً • تقدير تعليمي للمساحة: ' + Math.round(estimate) + ' bit قبل احتساب الكلمات الشائعة والأنماط.</p><small>النتيجة تقريبية وقد لا تكتشف كلمات القاموس أو التسريبات. استخدم عبارة طويلة وفريدة ومدير كلمات مرور، ولا تستخدم كلمة حقيقية هنا.</small>';
+    $('#passwordDemo').value = '';
+  }
+
+  function runPhishingLab() {
+    const index = Number($('#phishingSample')?.value || 0);
+    const sample = phishingSamples[index];
+    const output = $('#phishingOutput');
+    if (!sample || !output) return;
+    output.innerHTML = '<strong>العينة: ' + escapeCyberText(sample.title) + '</strong><p class="phishing-quote">' + escapeCyberText(sample.message) + '</p><ul>' + sample.indicators.map(item => '<li>' + escapeCyberText(item) + '</li>').join('') + '</ul><p><strong>الخطوة الآمنة:</strong> ' + escapeCyberText(sample.conclusion) + '</p>';
+  }
+
+  function runLogsLab() {
+    const counts = {};
+    demoLogs.forEach(line => {
+      const source = (line.match(/src=([0-9.]+)/) || [])[1] || 'unknown';
+      const failed = /result=failed/.test(line);
+      if (failed) counts[source] = (counts[source] || 0) + 1;
+    });
+    const suspicious = Object.entries(counts).filter(([, count]) => count >= 3);
+    const output = $('#logsOutput');
+    if (!output) return;
+    output.innerHTML = '<strong>النتيجة: ' + suspicious.length + ' مصدر تجريبي لديه 3 محاولات فاشلة أو أكثر</strong><ul>' +
+      Object.entries(counts).map(([source, count]) => '<li><code>' + source + '</code> — ' + count + ' محاولات فاشلة ' + (count >= 3 ? '<b class="cyber-alert">يستحق المراجعة</b>' : '<b class="cyber-safe">لا يتجاوز العتبة</b>') + '</li>').join('') +
+      '</ul><small>هذا تنبيه أولي فقط. تحقق من صاحب الحساب والوقت والأجهزة والسياق قبل الحكم على الحدث.</small>';
+  }
+
+  function runUrlLab() {
+    const raw = ($('#urlDemo')?.value || '').trim();
+    const output = $('#urlOutput');
+    if (!output) return;
+    if (!raw) { output.textContent = 'أدخل رابطاً توضيحياً أولاً.'; return; }
+    try {
+      const parsed = new URL(raw);
+      const flags = [];
+      if (!['https:', 'http:'].includes(parsed.protocol)) flags.push('المخطط ليس HTTP أو HTTPS.');
+      if (parsed.protocol !== 'https:') flags.push('الاتصال ليس HTTPS؛ لا تدخل بيانات حساسة قبل التحقق.');
+      if (parsed.username || parsed.password) flags.push('يحتوي الرابط على بيانات اعتماد قبل اسم النطاق.');
+      if (parsed.hostname.includes('@')) flags.push('صياغة النطاق غير معتادة.');
+      if (parsed.hostname.startsWith('xn--') || parsed.hostname.split('.').some(part => part.startsWith('xn--'))) flags.push('يحتوي النطاق على صيغة Punycode؛ تحقق من اسم الجهة حرفياً.');
+      if (/^\d{1,3}(\.\d{1,3}){3}$/.test(parsed.hostname)) flags.push('العنوان يستخدم IP مباشراً بدلاً من اسم نطاق.');
+      if (parsed.hostname.length > 60) flags.push('اسم النطاق طويل بشكل غير معتاد.');
+      output.innerHTML = '<strong>أجزاء الرابط</strong><ul><li>المخطط: <code>' + escapeCyberText(parsed.protocol) + '</code></li><li>اسم المضيف: <code>' + escapeCyberText(parsed.hostname) + '</code></li><li>المسار: <code>' + escapeCyberText(parsed.pathname) + '</code></li><li>وجود معاملات: ' + (parsed.search ? 'نعم' : 'لا') + '</li></ul>' +
+        (flags.length ? '<strong class="cyber-alert">ملاحظات تستحق الفحص</strong><ul>' + flags.map(flag => '<li>' + escapeCyberText(flag) + '</li>').join('') + '</ul>' : '<strong class="cyber-safe">لم تظهر مؤشرات تركيبية واضحة في هذا الفحص المحدود.</strong>') +
+        '<small>هذا ليس حكماً على سلامة الموقع. لم يتم فتح الرابط أو الاتصال به. افحص النطاق من مصدر مستقل.</small>';
+    } catch (error) {
+      output.textContent = 'صيغة الرابط غير صحيحة. اكتب عنواناً كاملاً مثل https://example.com';
+    }
+  }
+
+  function runSqlLab() {
+    const input = ($('#sqlDemo')?.value || '').trim();
+    const output = $('#sqlOutput');
+    if (!output) return;
+    if (!input) { output.textContent = 'اكتب اسماً تجريبياً أولاً.'; return; }
+    const patternDetected = /('|%27)\s*(or|and)\s+('|")?1('|")?\s*=\s*('|")?1|--|\/\*/i.test(input);
+    const safeValue = escapeCyberText(input);
+    output.innerHTML = '<strong>مدخل المستخدم:</strong> <code>' + safeValue + '</code>' +
+      '<div class="sql-comparison"><div><b class="cyber-alert">دمج نصي غير آمن</b><p>عند إدخال النص مباشرة داخل أمر SQL، قد يتغير معنى الاستعلام إذا لم تُعالج المدخلات بطريقة صحيحة.</p><small>' + (patternDetected ? 'رصد المختبر نمطاً يشبه محاولة تغيير شرط الاستعلام.' : 'لا يرصد المختبر هذا النمط البسيط؛ هذا لا يثبت أن المدخل آمن.') + '</small></div>' +
+      '<div><b class="cyber-safe">استعلام معلّم</b><p>تُرسل قيمة المستخدم كمعامل منفصل عن بنية الاستعلام، فلا تتحول إلى جزء من تعليمات SQL.</p><small>الحل الصحيح هو استخدام Prepared Statements/Parameterized Queries في التطبيق الحقيقي.</small></div></div>' +
+      '<small>هذه محاكاة نصية تعليمية فقط؛ لا يوجد اتصال بقاعدة بيانات ولا تنفيذ لأي أمر.</small>';
+  }
+
   function quizPage() {
     if (quizIndex >= quiz.length) {
       return sectionHeading('النتيجة • تدريبك اليوم', 'أكملت اختبار الملاحظة', 'هذه النتيجة تخص إجابات هذا التمرين فقط، ولا تقيس شخصيتك أو ذكاءك.') +
@@ -562,6 +847,7 @@
     spot: spotPage,
     cases: casesPage,
     lab: labPage,
+    cyber: cyberPage,
     quiz: quizPage,
     library: libraryPage,
     notes: notesPage,
@@ -685,6 +971,13 @@
         : 'هذا مثال على الانحياز التأكيدي: جمع ما يدعم الفكرة فقط. حاول البحث عن أمثلة مضادة أيضاً.';
       return;
     }
+
+    if (event.target.closest('#runHash')) { runHashLab(); return; }
+    if (event.target.closest('#runPassword')) { runPasswordLab(); return; }
+    if (event.target.closest('#runPhishing')) { runPhishingLab(); return; }
+    if (event.target.closest('#runLogs')) { runLogsLab(); return; }
+    if (event.target.closest('#runUrl')) { runUrlLab(); return; }
+    if (event.target.closest('#runSql')) { runSqlLab(); return; }
 
     const quizOption = event.target.closest('[data-quiz-option]');
     if (quizOption) {
