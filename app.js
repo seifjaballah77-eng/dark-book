@@ -1439,7 +1439,7 @@
     currentPage = activeNav;
     pageContent.innerHTML = html;
     pageLabel.textContent = label;
-    $('.nav-item[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === activeNav));
+    $$('.nav-item[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === activeNav));
     sidebar.classList.remove('open');
     $('#mobileOverlay').classList.remove('show');
     if (activeNav === 'notes' && $('#userNotes')) $('#userNotes').value = localStorage.getItem('darkBookNotes') || '';
