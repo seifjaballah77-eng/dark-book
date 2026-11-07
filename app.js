@@ -1096,7 +1096,7 @@
       '<div class="book-tools"><button class="book-tool-button" data-book-action="question">✧ سؤال مراجعة</button><button class="book-tool-button" data-book-action="fact">◈ فكرة أساسية</button><button class="book-tool-button" data-book-action="save">＋ أضف إلى دفتر التأمل</button></div>' +
       '<div id="bookActionResult" class="book-action-result" hidden></div>' +
       '<div class="book-toc"><div class="book-toc-heading">في هذا الملف</div>' + book.chapters.map((chapter, i) =>
-        '<a href="#book-chapter-' + i + '"><span>' + String(i + 1).padStart(2, '0') + '</span>' + chapter.title + '</a>'
+        '<a href="#book/' + index + '/chapter/' + i + '"><span>' + String(i + 1).padStart(2, '0') + '</span>' + chapter.title + ' ↗</a>'
       ).join('') + '</div>' +
       '<div class="book-chapters">' + book.chapters.map((chapter, i) =>
         '<section class="book-chapter" id="book-chapter-' + i + '">' +
@@ -1207,7 +1207,7 @@
     return '<ul class="article-rich-list">' + items.map(item => '<li>' + item + '</li>').join('') + '</ul>';
   }
 
-  function buildLongArticle(type, item, id) {
+  function buildLongArticle(type, item, id, routeBaseOverride, parentRouteOverride) {
     const d = articleContext(type, item, id);
     const facts = d.facts.length ? d.facts : [d.intro, d.practice];
     const a = facts[0] || d.intro, b = facts[1] || d.core, c = facts[2] || d.practice, e = facts[3] || d.caution;
@@ -1383,22 +1383,38 @@
       'ارجع إلى هذا الملف عند الحاجة، وقارن ما تعلمته بمصادر مستقلة. غيّر رأيك عندما تظهر معلومات أقوى، واطلب الدعم عندما يصبح الموقف أكبر من قدرتك على التعامل معه وحدك.'
     ]));
 
+    if (type === 'book') {
+      const chapterLinks = (item.chapters || []).map((chapter, index) =>
+        '<a href="#book/' + id + '/chapter/' + index + '"><span>' + String(index + 1).padStart(2, '0') + '</span>' + articleEsc(chapter.title) + ' • افتح الفصل المستقل ↗</a>'
+      ).join('');
+      sections.splice(1, 0, articleSection('book-chapter-directory','دليل الكتاب','فصول هذا الكتاب',[
+        'يمكن فتح كل وحدة من وحدات القراءة في صفحة مستقلة لها رابط خاص. هذه الشروحات ملاحظات تعليمية أصلية من إعداد الموسوعة، وليست نسخاً حرفياً من نص الكتاب أو بديلاً عن قراءته.'
+      ], '<div class="article-chapter-links">' + chapterLinks + '</div>'));
+    }
+
+    const routeBase = routeBaseOverride || (type + '/' + id);
     const toc = sections.map((section, i) => {
       const found = section.match(/id="([^"]+)"/);
       const heading = section.match(/<h2>([\s\S]*?)<\/h2>/);
-      return '<a href="#' + type + '/' + id + '/' + (found ? found[1] : '') + '"><span>' + String(i + 1).padStart(2, '0') + '</span>' + (heading ? heading[1] : '') + '</a>';
+      return '<a href="#' + routeBase + '/' + (found ? found[1] : '') + '"><span>' + String(i + 1).padStart(2, '0') + '</span>' + (heading ? heading[1] : '') + '</a>';
     }).join('');
 
-    let parentRoute = type === 'lesson' ? 'learn' : type === 'pattern' ? 'spot' : type === 'protocol' ? 'protocol' : type === 'cyber' ? 'cyber' : 'library';
+    let parentRoute = parentRouteOverride || (type === 'lesson' ? 'learn' : type === 'pattern' ? 'spot' : type === 'protocol' ? 'protocol' : type === 'cyber' ? 'cyber' : 'library');
     let relatedLinks = '';
     if (type === 'lesson') relatedLinks = lessons.filter(x => x.id !== d.id).slice(0,4).map(x => '<a href="#lesson/' + x.id + '">' + x.title + ' ↗</a>').join('');
     if (type === 'pattern') relatedLinks = patterns.map((x,i)=>({x,i})).filter(y=>y.i!==Number(id)).slice(0,4).map(y=>'<a href="#pattern/'+y.i+'">'+y.x.title+' ↗</a>').join('');
     if (type === 'protocol') relatedLinks = protocolTechniques.filter(x => x.id !== item.id).slice(0,4).map(x => '<a href="#protocol/' + x.id + '">' + x.title + ' ↗</a>').join('');
     if (type === 'cyber') relatedLinks = cyberModules.map((x,i)=>({x,i})).filter(y=>y.i!==Number(id)).slice(0,4).map(y=>'<a href="#cyber/'+y.i+'">'+y.x.title+' ↗</a>').join('');
     if (type === 'book') relatedLinks = books.map((x,i)=>({x,i})).filter(y=>y.i!==Number(id)).slice(0,4).map(y=>'<a href="#book/'+y.i+'">'+y.x.title+' ↗</a>').join('');
+    if (type === 'bookchapter') {
+      const bookIndex = Number(String(id).split('/')[0]);
+      const chapterIndex = Number(String(id).split('/')[1]);
+      const parentBook = books[bookIndex];
+      if (parentBook) relatedLinks = parentBook.chapters.map((chapter, index) => ({chapter,index})).filter(x => x.index !== chapterIndex).map(x => '<a href="#book/' + bookIndex + '/chapter/' + x.index + '">' + x.chapter.title + ' ↗</a>').join('');
+    }
 
     return '<div class="long-article-page">' +
-      '<div class="article-breadcrumb"><a href="#' + parentRoute + '">← العودة إلى ' + (pageNames[parentRoute] || 'الفهرس') + '</a><span>/</span><span>' + d.category + '</span></div>' +
+      '<div class="article-breadcrumb"><a href="#' + parentRoute + '">← العودة إلى ' + (parentRoute.startsWith('book/') ? 'صفحة الكتاب' : (pageNames[parentRoute] || 'الفهرس')) + '</a><span>/</span><span>' + d.category + '</span></div>' +
       '<header class="long-article-hero"><div class="article-hero-ornament" aria-hidden="true">◉</div><div class="eyebrow">ملف موسوعي مستقل • قراءة معمقة</div><div class="long-article-category">' + d.category + '</div><h1>' + d.title + '</h1><p>' + d.intro + '</p><div class="long-article-meta"><span>22 فصلاً تفصيلياً</span><span>أمثلة وتطبيقات</span><span>مراجعة ومراجع</span></div><div class="article-share-row"><button class="secondary-btn" data-copy-url>انسخ رابط الدرس ↗</button><button class="secondary-btn" onclick="window.print()">طباعة / حفظ PDF</button></div></header>' +
       '<div class="long-article-layout"><aside class="article-toc"><div class="article-toc-head">فهرس القراءة <small>22 قسماً</small></div>' + toc + '</aside><article class="long-article-body">' + sections.join('') +
       '<div class="article-related"><h2>تابع القراءة</h2>' + relatedLinks + '</div>' +
@@ -1426,8 +1442,20 @@
       const item = cyberModules[Number(id)];
       if (item) { html = buildLongArticle('cyber', item, id); activeNav = 'cyber'; label = item.title; }
     } else if (group === 'book') {
-      const item = books[Number(id)];
-      if (item) { html = buildLongArticle('book', item, id); activeNav = 'library'; label = item.title; }
+      const bookIndex = Number(id);
+      const item = books[bookIndex];
+      if (item && route[2] === 'chapter' && route[3] !== undefined) {
+        const chapterIndex = Number(route[3]);
+        const chapter = item.chapters[chapterIndex];
+        if (chapter) {
+          const chapterPage = { title: chapter.title, author: item.author, category: item.category, kind: item.kind, note: chapter.intro, chapters: [chapter] };
+          html = buildLongArticle('bookchapter', chapterPage, bookIndex + '/' + chapterIndex, 'book/' + bookIndex + '/chapter/' + chapterIndex, 'book/' + bookIndex);
+          activeNav = 'library'; label = chapter.title;
+        }
+      } else if (item) {
+        html = buildLongArticle('book', item, id);
+        activeNav = 'library'; label = item.title;
+      }
     }
 
     if (!html) {
@@ -1444,8 +1472,9 @@
     $('#mobileOverlay').classList.remove('show');
     if (activeNav === 'notes' && $('#userNotes')) $('#userNotes').value = localStorage.getItem('darkBookNotes') || '';
     pageContent.focus({ preventScroll: true });
-    if (route[2]) {
-      const targetSection = document.getElementById(route[2]);
+    const sectionRoute = group === 'book' && route[2] === 'chapter' ? route[4] : route[2];
+    if (sectionRoute) {
+      const targetSection = document.getElementById(sectionRoute);
       if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       else window.scrollTo({ top: 0, behavior: 'smooth' });
     } else window.scrollTo({ top: 0, behavior: 'smooth' });
