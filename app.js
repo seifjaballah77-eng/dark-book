@@ -418,10 +418,7 @@
         '<article class="content-card lesson-card" data-lesson-card="' + lesson.id + '">' +
         '<div class="card-topline"><span class="tag">' + lesson.category + '</span><span class="card-number">0' + (index + 1) + '</span></div>' +
         '<h3>' + lesson.title + '</h3><p>' + lesson.summary + '</p><div class="book-meta">مدة القراءة: ' + lesson.time + '</div>' +
-        '<button class="card-action" data-lesson="' + lesson.id + '">افتح الدرس ←</button>' +
-        '<div class="lesson-detail" id="detail-' + lesson.id + '"><p>' + lesson.body + '</p>' +
-        '<div class="detail-label">ما الذي ينبغي ملاحظته؟</div><ul>' + lesson.points.map(point => '<li>' + point + '</li>').join('') + '</ul>' +
-        '<div class="detail-label">تطبيق عملي</div><p>' + lesson.practice + '</p></div></article>'
+        '<a class="card-action lesson-open-link" href="#lesson/' + lesson.id + '">افتح الصفحة الكاملة ←</a></article>'
       ).join('') + '</div>';
   }
 
@@ -429,7 +426,7 @@
     return sectionHeading('المرحلة الثانية • الحماية', 'تعرّف على أنماط التلاعب', 'هذه البطاقات للتوعية وكشف السلوك المؤذي، لا لتشخيص الأشخاص أو اتهامهم من موقف منفرد.') +
       '<div class="card-grid">' + patterns.map((item, i) =>
         '<article class="content-card pattern-card"><div class="card-topline"><span class="tag">' + item.tag + '</span><span class="card-number">0' + (i + 1) + '</span></div>' +
-        '<h3>' + item.title + '</h3><p>' + item.desc + '</p><button class="card-action" data-pattern="' + i + '">شاهد المؤشرات والردود ←</button>' +
+        '<h3>' + item.title + '</h3><p>' + item.desc + '</p><a class="card-action lesson-open-link" href="#pattern/' + i + '">افتح الملف الكامل ←</a>' +
         '<div class="pattern-warning">التكرار والسياق أهم من عبارة واحدة.</div></article>'
       ).join('') + '</div>';
   }
@@ -920,7 +917,7 @@
       '<div class="section-row"><div><h2 class="section-title">خريطة المعرفة</h2><div class="section-sub">من الصفر إلى بناء خطة دفاعية متكاملة</div></div></div>' +
       '<div class="cyber-module-grid">' + cyberModules.map((module, index) =>
         '<details class="cyber-module" ' + (index === 0 ? 'open' : '') + '><summary><span class="cyber-module-number">' + String(index + 1).padStart(2, '0') + '</span><span class="cyber-module-main"><strong>' + module.title + '</strong><small>' + module.level + ' • ' + module.time + '</small></span><span class="cyber-expand">＋</span></summary>' +
-        '<div class="cyber-module-body"><p>' + module.intro + '</p><ul>' + module.lessons.map(lesson => '<li>' + lesson + '</li>').join('') + '</ul><div class="cyber-exercise"><strong>تطبيق مقترح</strong><p>' + module.exercise + '</p></div></div></details>'
+        '<div class="cyber-module-body"><p>' + module.intro + '</p><ul>' + module.lessons.map(lesson => '<li>' + lesson + '</li>').join('') + '</ul><div class="cyber-exercise"><strong>تطبيق مقترح</strong><p>' + module.exercise + '</p></div><a class="cyber-full-link" href="#cyber/' + index + '">افتح الدرس التفصيلي ←</a></div></details>'
       ).join('') + '</div>' +
       '<div class="section-row"><div><h2 class="section-title">المختبرات التفاعلية</h2><div class="section-sub">الأدوات تعمل محلياً داخل هذه الصفحة باستخدام بيانات تجريبية</div></div></div>' +
       '<div class="cyber-labs">' +
@@ -1070,10 +1067,10 @@
     });
     return '<div class="book-index-head"><span>فهرس المكتبة</span><b>' + filtered.length + ' / ' + books.length + '</b></div>' +
       '<div class="book-index-list">' + (filtered.length ? filtered.map(({ book, index }) =>
-        '<button class="book-index-item' + (activeBook === index ? ' active' : '') + '" data-book-index="' + index + '">' +
+        '<a class="book-index-item' + (activeBook === index ? ' active' : '') + '" href="#book/' + index + '">' +
         '<span class="book-index-number">' + String(index + 1).padStart(2, '0') + '</span>' +
         '<span class="book-index-text"><strong>' + book.title + '</strong><small>' + book.author + '</small></span>' +
-        '<span class="book-index-arrow">‹</span></button>'
+        '<span class="book-index-arrow">‹</span></a>'
       ).join('') : '<div class="empty-state">لا توجد كتب مطابقة.</div>') + '</div>';
   }
 
@@ -1083,7 +1080,7 @@
     return '<article class="book-reader-content">' +
       '<div class="book-reader-cover"><div class="cover-stain"></div><div class="cover-eyeline">THE SHADOW LIBRARY • ' + String(index + 1).padStart(2, '0') + '</div>' +
       '<div class="cover-title">' + book.title + '</div><div class="cover-author">' + book.author + '</div><div class="cover-mark">✦</div></div>' +
-      '<div class="book-reader-meta"><span class="tag">' + book.category + '</span><span class="book-type">' + book.kind + '</span><span class="book-type">' + book.chapters.length + ' وحدات قراءة</span></div>' +
+      '<div class="book-reader-meta"><span class="tag">' + book.category + '</span><span class="book-type">' + book.kind + '</span><span class="book-type">' + book.chapters.length + ' وحدات قراءة</span><a class="book-full-link" href="#book/' + index + '">افتح صفحة الكتاب المستقلة ↗</a></div>' +
       '<h2 class="book-reader-title">' + book.title + '</h2><div class="book-author-line">تأليف: ' + book.author + '</div>' +
       '<p class="book-reader-intro">' + book.note + '</p>' +
       '<div class="book-callout"><strong>طريقة استخدام هذا الملف</strong><p>هذه وحدات شرح ومراجعة أعدّتها الموسوعة حول أفكار الكتاب؛ ليست نقلاً حرفياً ولا ادعاءً بأنها فهرس الفصول الأصلي. اقرأ الأفكار نقدياً، وارجع إلى الكتاب للتحقق من السياق.</p></div>' +
