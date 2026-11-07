@@ -334,3 +334,8 @@ body:after{content:"";position:fixed;inset:-12%;z-index:0;pointer-events:none;op
 .article-source-card a{font-size:9px;color:#dca1b0;text-decoration:none;line-height:2}
 .article-source-card a:hover{color:#fff;text-decoration:underline}
 .article-source-card p{font-size:9px;color:#968b98;line-height:2;margin:0}
+
+
+/* Keep the smoky ring around text edges so it decorates without hiding reading */
+.smoke-orbit:before{opacity:.68;mask:radial-gradient(ellipse at center,transparent 52%,#000 72%)}
+.smoke-orbit:after{inset:-19px;opacity:.58;mask:radial-gradient(ellipse at center,transparent 60%,#000 78%)}
