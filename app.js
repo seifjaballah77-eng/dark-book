@@ -148,14 +148,141 @@
   ];
 
   const books = [
-    { title: 'Influence: The Psychology of Persuasion', author: 'Robert B. Cialdini', category: 'التأثير الاجتماعي', note: 'يعرض مبادئ التأثير والإقناع، مع أهمية فهمها نقدياً وعدم استخدامها لانتزاع موافقة الآخرين.' },
-    { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', category: 'اتخاذ القرار', note: 'مدخل واسع إلى التفكير السريع والبطيء والانحيازات التي تؤثر في أحكامنا.' },
-    { title: 'The Gaslight Effect', author: 'Dr. Robin Stern', category: 'العلاقات', note: 'كتاب توعوي عن ديناميات التشكيك في الإدراك داخل العلاقات.' },
-    { title: 'What Every BODY Is Saying', author: 'Joe Navarro with Marvin Karlins', category: 'التواصل غير اللفظي', note: 'يتناول ملاحظة الإشارات غير اللفظية؛ لا ينبغي تفسير حركة منفردة كدليل قاطع على الكذب أو النية.' },
-    { title: 'Never Split the Difference', author: 'Chris Voss with Tahl Raz', category: 'التفاوض', note: 'أفكار عملية عن الاستماع والأسئلة والتفاوض، ويمكن تكييفها لتواصل عادل وواضح.' },
-    { title: 'Why Does He Do That?', author: 'Lundy Bancroft', category: 'العلاقات والسلامة', note: 'يناقش أنماط السيطرة والإساءة في العلاقات ومؤشرات تستحق الانتباه.' },
-    { title: 'The Dance of Anger', author: 'Harriet Lerner', category: 'الحدود والتواصل', note: 'يركز على الغضب والعلاقات وتغيير أنماط التفاعل.' },
-    { title: 'In Sheep’s Clothing', author: 'George K. Simon', category: 'السلوك المؤذي', note: 'طرح شعبي عن السلوكيات المتلاعبة؛ اقرأه بوعي نقدي ولا تتعامل معه كأداة تشخيص.' }
+    {
+      title: 'Influence: The Psychology of Persuasion', author: 'Robert B. Cialdini', category: 'التأثير الاجتماعي', kind: 'علم نفس اجتماعي',
+      note: 'مرجع مهم لفهم كيف تؤثر الأعراف والتوقعات والسياق في قراراتنا. ندرسه من زاوية الوعي بالموافقة الحرة، لا كدليل لانتزاعها.',
+      chapters: [
+        { title: 'متى نقول نعم؟', intro: 'قراراتنا لا تصدر دائماً من تقييم هادئ لكل معلومة؛ قد تؤثر فيها العادة والوقت والضغط الاجتماعي والشعور بالالتزام.', example: 'قد توافق على طلب إضافي لأنك وافقت سابقاً على طلب صغير، رغم أن ظروفك تغيّرت.', reflect: 'هل موافقتك الحالية نابعة من رغبتك الآن، أم من رغبتك في أن تبدو متسقاً مع قرار قديم؟' },
+        { title: 'الدليل الاجتماعي والسلطة', intro: 'نستعين بالآخرين لفهم المواقف الغامضة، وقد نمنح أصحاب المكانة ثقة أكبر مما تسمح به الأدلة.', example: 'انتشار منتج لا يثبت أنه الأفضل، ولقب المتحدث لا يجعل كل ادعاء صحيحاً.', reflect: 'ما الدليل المستقل الذي يبقى لو حذفنا عدد المتابعين واللقب؟' },
+        { title: 'مناعة القرار', intro: 'التأثير ليس سيئاً دائماً؛ يصبح مقلقاً عندما يخفي معلومات أو يضيّق حق الرفض أو يصطنع الاستعجال.', example: 'طلب مهلة ونسخة مكتوبة من الشروط يعيد القرار إلى مساحة التفكير.', reflect: 'ضع قاعدة شخصية: القرارات المهمة لا تتخذ تحت تهديد أو استعجال غير مبرر.' }
+      ]
+    },
+    {
+      title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', category: 'العقل والانحيازات', kind: 'علم نفس معرفي',
+      note: 'يعرض أبحاثاً وأفكاراً عن الحكم واتخاذ القرار. بعض تفاصيل الإطار العلمي تطورت لاحقاً، لذلك نقرأه مع تحديثات البحث لا كقانون مطلق.',
+      chapters: [
+        { title: 'التفكير السريع والتفكير المتأني', intro: 'نستخدم أحكاماً تلقائية سريعة في المواقف اليومية، ونلجأ إلى جهد أكبر عندما نتوقف للفحص والحساب والمقارنة.', example: 'قد يبدو عنوان مثير مقنعاً في لحظته، لكن فحص المصدر والتاريخ والمنهج يحتاج إلى وقت.', reflect: 'أي قرار اتخذته مؤخراً بسرعة وكان يستحق مراجعة ثانية؟' },
+        { title: 'الاختصارات والانحيازات', intro: 'الاختصارات الذهنية توفر الجهد، لكنها قد تجعلنا نبالغ في تقدير ما يسهل تذكره أو نخلط بين الارتباط والسببية.', example: 'قصة واحدة مؤثرة لا تكفي لتقدير مدى شيوع ظاهرة في المجتمع.', reflect: 'ابحث عن معدل أساسي أو بيانات أوسع قبل تعميم قصة فردية.' },
+        { title: 'الثقة وعدم اليقين', intro: 'الشعور باليقين ليس هو نفسه جودة الدليل. قد نبني قصة متماسكة من معلومات قليلة وننسى ما لا نعرفه.', example: 'تفسير صمت شخص بأنه غضب قد يكون قصة ممكنة، لكنه ليس الحقيقة الوحيدة.', reflect: 'اكتب ما تعرفه، وما تستنتجه، وما لا تعرفه بعد.' }
+      ]
+    },
+    {
+      title: 'The Gaslight Effect', author: 'Dr. Robin Stern', category: 'العلاقات والحدود', kind: 'مرجع توعوي',
+      note: 'كتاب توعوي عن أنماط التشكيك في الإدراك داخل العلاقات. لا يجعل كل خلاف في الذاكرة تلاعباً نفسياً.',
+      chapters: [
+        { title: 'كيف يبدأ الشك بالنفس؟', intro: 'قد تتكرر رسائل تنفي تجربتك أو تقلل منها حتى تبدأ في التشكيك في فهمك للأحداث.', example: 'كلما أثرت مشكلة محددة، يتحول الحوار إلى اتهامك بالحساسية بدلاً من مناقشة ما حدث.', reflect: 'هل يتكرر هذا التحويل؟ وهل توجد مساحة آمنة للاختلاف؟' },
+        { title: 'النمط والسياق', intro: 'لا تكفي عبارة واحدة أو اختلاف في الذاكرة لإثبات نمط. نبحث عن التكرار، اختلال القوة، الأثر، ووجود تحريف مستمر.', example: 'قد يختلف شخصان بصدق حول تفصيل واحد؛ هذا يختلف عن إنكار متكرر لوقائع موثقة بهدف إسكات الطرف الآخر.', reflect: 'صف الوقائع دون وصف النوايا، ثم راقب النمط عبر الزمن.' },
+        { title: 'استعادة الثقة بالواقع', intro: 'التدوين الآمن، والمشورة المستقلة، والأسئلة المحددة قد تساعد على استعادة منظور متوازن.', example: 'بدلاً من نقاش دائري، اكتب الاتفاقات والوقائع المهمة واطلب توضيحاً محدداً.', reflect: 'حدد شخصاً موثوقاً يمكنك التحدث معه عند الارتباك.' }
+      ]
+    },
+    {
+      title: 'What Every BODY Is Saying', author: 'Joe Navarro with Marvin Karlins', category: 'التواصل غير اللفظي', kind: 'ملاحظة سلوكية',
+      note: 'مدخل لملاحظة التواصل غير اللفظي. لا توجد حركة عين أو وضعية جسد منفردة تكشف الكذب أو النية بصورة موثوقة.',
+      chapters: [
+        { title: 'الجسد في سياقه', intro: 'الإشارات غير اللفظية تتأثر بالثقافة والراحة والبيئة والاختلافات الفردية؛ لذلك لا تفسر بمعزل عن السياق.', example: 'تشابك الذراعين قد يعني البرد أو الراحة أو التحفظ، وليس حكماً جاهزاً على الشخص.', reflect: 'ما التفسيرات البديلة للسلوك الذي لاحظته؟' },
+        { title: 'خط الأساس والتغير', intro: 'الملاحظة الأكثر فائدة تركز على التغير عن السلوك المعتاد للشخص، مع الانتباه إلى الظروف التي قد تفسره.', example: 'التوتر في مقابلة عمل قد يرتبط بالموقف نفسه وليس بإخفاء معلومة.', reflect: 'قارن السلوك في مواقف متشابهة، ولا تحول الملاحظة إلى اتهام.' },
+        { title: 'حدود قراءة الجسد', intro: 'لغة الجسد ليست جهاز كشف كذب. الأفضل استخدامها لفهم الراحة والانزعاج المحتملين ثم السؤال باحترام.', example: 'إذا بدا شخص متوتراً، يمكنك أن تسأل إن كان يحتاج استراحة بدلاً من افتراض أنه يكذب.', reflect: 'استبدل «أنا أعرف ما تفكر به» بـ «هل فهمت منك بشكل صحيح؟»' }
+      ]
+    },
+    {
+      title: 'Never Split the Difference', author: 'Chris Voss with Tahl Raz', category: 'التفاوض والتواصل', kind: 'مهارات عملية',
+      note: 'يعرض أدوات تفاوض وأسئلة واستماع. نستخدمها لبناء تفاهم واضح، لا للضغط أو انتزاع تنازل.',
+      chapters: [
+        { title: 'الاستماع النشط', intro: 'إعادة صياغة ما تسمعه تساعد على التأكد من الفهم وتخفيف سوء التواصل.', example: '«يبدو أن أكثر ما يقلقك هو موعد التسليم، هل فهمت ذلك؟»', reflect: 'في نقاشك القادم، لخّص وجهة نظر الطرف الآخر قبل الرد.' },
+        { title: 'تسمية المشاعر والأسئلة', intro: 'وصف الانطباع بحذر وطرح أسئلة مفتوحة قد يفتح مساحة للحوار من دون الادعاء بمعرفة النوايا.', example: '«يبدو أن هذا الخيار يسبب لك قلقاً؛ ما الجزء الذي يحتاج إلى توضيح؟»', reflect: 'استخدم صياغة احتمالية تسمح للطرف الآخر بتصحيحك.' },
+        { title: 'الاتفاق العادل', intro: 'التفاوض الجيد يوضح المصالح والحدود والخيارات، ويحافظ على حق الطرفين في الرفض.', example: 'عرض بديلين حقيقيين مع توضيح الكلفة والقيود لكل منهما.', reflect: 'ما الشروط التي تجعل الاتفاق مقبولاً للطرفين؟' }
+      ]
+    },
+    {
+      title: 'Why Does He Do That?', author: 'Lundy Bancroft', category: 'العلاقات والسلامة', kind: 'توعية بالعلاقات المؤذية',
+      note: 'يناقش أنماط السيطرة والإساءة في العلاقات. اقرأه للتوعية، ولا تستخدمه لتشخيص شخص من بعيد.',
+      chapters: [
+        { title: 'السلوك المسيطر', intro: 'قد يظهر التحكم عبر المراقبة أو العزل أو فرض القواعد أو العقاب عند الاختلاف، لا عبر الغضب وحده.', example: 'إصرار طرف على معرفة كل تحركات الآخر ومنعه من لقاء أصدقائه.', reflect: 'هل تُحترم استقلاليتك وحقك في التواصل والقرار؟' },
+        { title: 'المسؤولية لا الأعذار', intro: 'الضغوط أو الغيرة أو الماضي قد تفسر بعض المشاعر، لكنها لا تبرر الإيذاء أو التهديد.', example: 'الاعتذار الحقيقي يصاحبه تحمل للمسؤولية وتغير سلوكي مستمر، لا مجرد وعود بعد كل خلاف.', reflect: 'راقب الأفعال المتكررة لا الكلمات وحدها.' },
+        { title: 'السلامة وخطة الدعم', intro: 'عند وجود تهديد أو خوف، تصبح السلامة والدعم الموثوق أهم من محاولة كسب النقاش.', example: 'التحدث مع شخص موثوق أو جهة محلية مختصة ووضع خطة خروج آمنة عند الحاجة.', reflect: 'لا تواجه الخطر وحدك، ولا تعلن خطة السلامة لمن قد يؤذيك.' }
+      ]
+    },
+    {
+      title: 'The Dance of Anger', author: 'Harriet Lerner', category: 'العلاقات والحدود', kind: 'تواصل ونمو شخصي',
+      note: 'يركز على الغضب وأنماط التفاعل والعلاقات، مع تشجيع المسؤولية عن الاستجابة الشخصية.',
+      chapters: [
+        { title: 'الغضب إشارة وليس أمراً', intro: 'قد يشير الغضب إلى حد تم تجاوزه أو حاجة لم تُلبَّ، لكنه لا يحدد وحده ما يجب فعله.', example: 'الشعور بالغضب بعد مقاطعتك قد يدعوك لتوضيح حاجتك إلى إكمال الحديث.', reflect: 'ما الحاجة أو الحد الذي يشير إليه غضبك؟' },
+        { title: 'الخروج من الدائرة المتكررة', intro: 'بعض العلاقات تدخل في نمط مطاردة وانسحاب أو لوم ودفاع. تغيير استجابتك قد يفتح مساراً مختلفاً.', example: 'بدلاً من تكرار الرسائل وقت الانفعال، اتفق على وقت هادئ للنقاش.', reflect: 'ما الجزء من النمط الذي تستطيع تغييره دون تحمل مسؤولية سلوك الآخر؟' },
+        { title: 'الوضوح والحدود', intro: 'التعبير عن موقفك بوضوح أفضل من التلميح أو انتظار أن يخمّن الآخر ما تحتاجه.', example: '«أريد أن نناقش هذا دون مقاطعة. سأكمل حديثي ثم أستمع إليك».', reflect: 'اكتب طلباً واضحاً يصف ما تحتاجه وما ستفعله.' }
+      ]
+    },
+    {
+      title: 'In Sheep’s Clothing', author: 'George K. Simon', category: 'السلوك المؤذي', kind: 'طرح شعبي نقدي',
+      note: 'طرح شعبي حول السلوك العدواني غير المباشر. مصطلحاته ليست تشخيصاً سريرياً ولا ينبغي تعميمها.',
+      chapters: [
+        { title: 'العدوان غير المباشر', intro: 'قد يتجنب بعض الأشخاص المواجهة المباشرة ويستخدمون المراوغة أو تحويل اللوم أو التقليل من شأن الطرف الآخر.', example: 'تكرار تجاهل سؤال محدد والانتقال إلى انتقاد أسلوب من طرحه.', reflect: 'ركز على السلوك المحدد والاتفاق المطلوب بدلاً من وضع ملصق للشخص.' },
+        { title: 'التعرف دون وصم', intro: 'وصف النمط لا يعني تشخيص صاحبه. نحتاج إلى تكرار وقرائن وسياق، مع ترك احتمال سوء الفهم قائماً.', example: 'قد يكون الشخص دفاعياً في موقف واحد بسبب الضغط؛ النمط طويل الأمد يحتاج إلى تقييم أوسع.', reflect: 'هل تصف فعلاً يمكن التحقق منه أم تستنتج صفة ثابتة؟' },
+        { title: 'الرد الحازم', intro: 'الوضوح، والتوثيق عند الحاجة، وعدم الدخول في جدل لا ينتهي، أدوات أكثر أماناً من التصعيد.', example: '«لن أتابع الحديث قبل أن نعود إلى السؤال الأصلي».', reflect: 'حدد حدود مشاركتك في الحوار.' }
+      ]
+    },
+    {
+      title: 'The 48 Laws of Power', author: 'Robert Greene', category: 'السلطة والتاريخ', kind: 'قراءة نقدية غير أكاديمية',
+      note: 'مجموعة أمثلة تاريخية وعبارات استراتيجية عن السلطة. ليست علماً تجريبياً ولا دليلاً أخلاقياً للتعامل مع الناس.',
+      chapters: [
+        { title: 'كيف تعمل السلطة في العلاقات؟', intro: 'السلطة قد تأتي من المال أو المنصب أو المعرفة أو التحكم في الموارد أو القدرة على تحديد جدول النقاش.', example: 'موظف يملك المعلومة الوحيدة عن إجراء ما قد يملك نفوذاً مؤقتاً على بقية الفريق.', reflect: 'من يملك المعلومات والخيارات؟ وهل توجد شفافية ومساءلة؟' },
+        { title: 'قراءة الأمثلة التاريخية', intro: 'الحكايات التاريخية تساعد على طرح أسئلة، لكنها لا تثبت أن القاعدة تصلح لكل زمان أو علاقة.', example: 'نجاح شخصية في ظرف ملكي قد لا يصلح معياراً لعلاقة عمل حديثة قائمة على التعاون.', reflect: 'ما السياق الذي حُذف من الحكاية؟ ومن دفع ثمن الاستراتيجية؟' },
+        { title: 'القوة والمسؤولية', intro: 'فهم النفوذ قد يحميك من الاستغلال، لكن تحويل كل تفاعل إلى لعبة سيطرة يفسد الثقة ويزيد الضرر.', example: 'استخدم معرفتك بإجراءات العمل لتحقيق العدالة لا لإخفاء المعلومات عن زملائك.', reflect: 'هل تزيد هذه الخطوة استقلال الآخرين ووضوحهم أم تقللهما؟' }
+      ]
+    },
+    {
+      title: 'The Laws of Human Nature', author: 'Robert Greene', category: 'الطبيعة البشرية', kind: 'قراءة تحليلية شعبية',
+      note: 'تأملات واسعة في الدوافع والسلوك مستندة إلى قصص وتاريخ. ليست قوانين علمية ثابتة ولا أداة لمعرفة نية شخص.',
+      chapters: [
+        { title: 'الدوافع والانفعالات', intro: 'قد تؤثر المشاعر والاحتياجات غير المعلنة في السلوك، لكن تفسيرها يتطلب حواراً وسياقاً لا تخميناً.', example: 'قد يعارض زميل فكرة ما لأسباب عملية لا بدافع الغيرة.', reflect: 'ضع تفسيرين غير شخصيين قبل أن تعزو السلوك إلى دافع خفي.' },
+        { title: 'الأنماط والاختلافات', intro: 'الناس يتغيرون بحسب الدور والضغط والخبرة؛ لا تختزل الشخص في سمة واحدة أو اختبار سريع.', example: 'الهدوء في اجتماع لا يعني بالضرورة ثقة أو بروداً أو خبثاً.', reflect: 'ما الدليل الذي يدعم وصفك؟ وما الذي قد ينقضه؟' },
+        { title: 'التعاطف الواقعي', intro: 'فهم منظور الآخر لا يعني الموافقة معه أو التخلي عن حدودك.', example: 'يمكنك فهم سبب غضب شخص مع رفض الإهانة أو التهديد.', reflect: 'كيف تجمع بين فهم الطرف الآخر واحترام نفسك؟' }
+      ]
+    },
+    {
+      title: 'The Art of Seduction', author: 'Robert Greene', category: 'الجاذبية والتأثير', kind: 'قراءة ثقافية نقدية',
+      note: 'يعرض أنماطاً تاريخية وأدبية للجاذبية. لا يعد مرجعاً علمياً للعلاقات، ولا يبرر الضغط أو تجاوز الموافقة.',
+      chapters: [
+        { title: 'الجاذبية كظاهرة اجتماعية', intro: 'الانطباع والجاذبية يتأثران بالسياق والثقافة والتوافق والاهتمامات المتبادلة، وليس بقالب سحري واحد.', example: 'الاهتمام الصادق المتبادل يختلف عن تقمص شخصية لإيهام الطرف الآخر.', reflect: 'هل تتصرف بطبيعتك أم تحاول أداء دور لإخفاء نواياك؟' },
+        { title: 'الخيال والصورة', intro: 'قد تجذبنا القصص والصور المثالية، لكن العلاقة الواقعية تحتاج إلى معرفة متبادلة وصدق.', example: 'لا تجعل الانطباع الأول يغطي على تناقضات متكررة في السلوك.', reflect: 'ما الذي تعرفه فعلاً عن الشخص بعيداً عن الصورة التي رسمتها؟' },
+        { title: 'الموافقة والاحترام', intro: 'أي تأثير عاطفي يصبح مؤذياً عندما يتجاوز الرفض أو يستغل الضعف أو يخلق اعتماداً قسرياً.', example: 'الرفض الواضح ينهي المحاولة؛ لا يُفسر كدعوة لمزيد من الضغط.', reflect: 'هل يستطيع الطرف الآخر قول لا دون خوف من العقاب؟' }
+      ]
+    },
+    {
+      title: 'The Psychopath Test', author: 'Jon Ronson', category: 'الشخصية والصحة النفسية', kind: 'صحافة استقصائية',
+      note: 'كتاب صحفي يستكشف مفهوم السيكوباتية وثقافة التشخيص. ليس أداة فحص ولا مرجعاً لتشخيص الأشخاص.',
+      chapters: [
+        { title: 'المصطلح وحدوده', intro: 'مصطلحات الشخصية المعقدة تحتاج إلى تعريف مهني وسياق. لا يجوز استنتاج اضطراب من قسوة أو اختلاف أو خلاف.', example: 'قلة التعاطف في موقف لا تكفي لتحديد اضطراب أو نمط شخصية.', reflect: 'هل تستخدم المصطلح لوصف سلوك محدد أم لوصم شخص؟' },
+        { title: 'التصنيف وخطر التبسيط', intro: 'التصنيفات قد تساعد المتخصصين، لكنها تصبح مضللة عندما تُحوّل إلى اختبارات إنترنت أو أحكام شعبية.', example: 'قائمة أسئلة قصيرة لا تمنحك صلاحية تشخيص زميل أو شريك.', reflect: 'ما حدود المصدر، ومن يملك صلاحية التقييم؟' },
+        { title: 'السلوك والأمان', intro: 'لست بحاجة إلى تشخيص شخص كي تضع حدوداً أمام التهديد أو الاستغلال أو العنف.', example: 'يمكنك طلب المساعدة بسبب سلوك مؤذٍ واضح دون أن تعرف اسمه الطبي.', reflect: 'ركّز على الأفعال وتأثيرها وخيارات السلامة.' }
+      ]
+    },
+    {
+      title: 'Emotional Intelligence', author: 'Daniel Goleman', category: 'الوعي العاطفي', kind: 'إطار تثقيفي شائع',
+      note: 'كتاب مؤثر في نشر مفهوم الذكاء العاطفي. الأطر والتعريفات تختلف بين الباحثين، ولا ينبغي اعتباره قياساً واحداً متفقاً عليه.',
+      chapters: [
+        { title: 'تسمية المشاعر', intro: 'تسمية الشعور بدقة تساعد على فهم الحاجة وتخفيف رد الفعل التلقائي.', example: 'قد يكون ما تسميه غضباً مزيجاً من الإحباط والقلق والشعور بعدم الاحترام.', reflect: 'ما الاسم الأقرب لشعورك الآن؟' },
+        { title: 'تنظيم الاستجابة', intro: 'التنظيم لا يعني قمع المشاعر؛ بل خلق مساحة بين الشعور والفعل واختيار استجابة مناسبة.', example: 'أخذ استراحة قصيرة قبل الرد على رسالة مستفزة.', reflect: 'ما الاستراتيجية التي تساعدك على التهدئة دون إيذاء نفسك أو غيرك؟' },
+        { title: 'التعاطف والتواصل', intro: 'التعاطف هو محاولة فهم التجربة، وليس الموافقة أو تحمل مسؤولية مشاعر الآخرين كلها.', example: '«أفهم أن الأمر أزعجك، دعنا نبحث عن حل يحترمنا معاً».', reflect: 'كيف تستمع دون أن تتخلى عن وجهة نظرك؟' }
+      ]
+    },
+    {
+      title: 'Mistakes Were Made (But Not by Me)', author: 'Carol Tavris and Elliot Aronson', category: 'التبرير والانحياز', kind: 'علم نفس اجتماعي',
+      note: 'يشرح التنافر المعرفي والتبرير الذاتي وكيف ندافع عن قراراتنا السابقة، حتى عندما تظهر معلومات جديدة.',
+      chapters: [
+        { title: 'التنافر المعرفي', intro: 'عندما تتعارض أفعالنا مع صورتنا عن أنفسنا قد نشعر بعدم ارتياح ونبحث عن تفسير يقلل هذا التوتر.', example: 'بعد شراء منتج مكلف قد نبالغ في مدح مزاياه ونتجاهل عيوبه.', reflect: 'هل تدافع عن القرار لأنه صحيح أم لأن الاعتراف بالخطأ مؤلم؟' },
+        { title: 'تبرير الخطأ', intro: 'قد يتحول الاعتراف بخطأ صغير إلى تهديد لصورة الذات، فنبرر بدلاً من التعلم.', example: 'مدير يرفض تصحيح قرار واضح لأن ذلك سيظهر أنه أخطأ أمام فريقه.', reflect: 'كيف تجعل الاعتذار أو التصحيح علامة مسؤولية لا هزيمة؟' },
+        { title: 'تصحيح المسار', intro: 'مراجعة القرار تتطلب شجاعة الاعتراف بالمعلومات الجديدة والتمييز بين قيمة الشخص وصحة قراره.', example: 'تغيير رأيك بعد ظهور دليل أقوى علامة تعلم لا ضعف.', reflect: 'ما الدليل الذي قد يجعلك تغير موقفك؟' }
+      ]
+    },
+    {
+      title: 'The Confidence Game', author: 'Maria Konnikova', category: 'الخداع والثقة', kind: 'تحليل صحفي نفسي',
+      note: 'يستكشف كيف تُبنى الثقة وكيف يمكن استغلالها في الاحتيال. نركز على الوقاية والتحقق لا على إعادة إنتاج حيل المحتالين.',
+      chapters: [
+        { title: 'بناء الثقة', intro: 'قد يستغل المحتالون الألفة أو السلطة أو الرغبة أو الخوف كي تبدو الرواية مقنعة.', example: 'رسالة تبدو من جهة معروفة تطلب تحويل المال بسرعة إلى حساب جديد.', reflect: 'تحقق عبر قناة مستقلة لا عبر الرابط أو الرقم الوارد في الرسالة.' },
+        { title: 'علامات الخطر', intro: 'السرية القسرية والعجلة وضمان الربح وطلب معلومات حساسة تستحق التوقف والتحقق.', example: 'عرض يضمن عائداً عالياً بلا مخاطرة ويرفض توثيق التفاصيل.', reflect: 'ما الذي يمكن التحقق منه من مصدر مستقل؟' },
+        { title: 'الوقاية العملية', intro: 'الحماية تعتمد على التحقق الثنائي، والتريث، وعدم مشاركة رموز الدخول، وطلب رأي مستقل.', example: 'اتصل بالجهة من رقم رسمي تعرفه مسبقاً قبل تنفيذ أي تحويل.', reflect: 'ضع قاعدة: لا أشارك رمز تحقق ولا أرسل مالاً تحت ضغط.' }
+      ]
+    }
   ];
 
   const cases = [
@@ -231,6 +358,9 @@
   let quizScore = 0;
   let selectedQuiz = null;
   let activeCase = 0;
+  let activeBook = 0;
+  let activeBookFilter = 'الكل';
+  let bookSearchTerm = '';
 
   function showToast(message) {
     toastEl.textContent = message;
@@ -335,11 +465,80 @@
       '<div id="quizExplain" class="case-result" style="display:none"></div><div style="display:flex;justify-content:flex-end;margin-top:18px"><button class="primary-btn" id="quizNext" ' + (selectedQuiz === null ? 'disabled style="opacity:.4;cursor:not-allowed"' : '') + '>' + (quizIndex === quiz.length - 1 ? 'عرض النتيجة' : 'السؤال التالي') + ' ←</button></div></div>';
   }
 
+  function bookFiltersMarkup() {
+    const categories = ['الكل', ...new Set(books.map(book => book.category))];
+    return categories.map(category =>
+      '<button class="book-filter' + (activeBookFilter === category ? ' active' : '') + '" data-book-filter="' + category + '">' + category + '</button>'
+    ).join('');
+  }
+
+  function bookIndexMarkup() {
+    const filtered = books.map((book, index) => ({ book, index })).filter(({ book }) => {
+      const matchesCategory = activeBookFilter === 'الكل' || book.category === activeBookFilter;
+      const search = (book.title + ' ' + book.author + ' ' + book.category + ' ' + book.note).toLowerCase();
+      return matchesCategory && search.includes(bookSearchTerm.toLowerCase());
+    });
+    return '<div class="book-index-head"><span>فهرس المكتبة</span><b>' + filtered.length + ' / ' + books.length + '</b></div>' +
+      '<div class="book-index-list">' + (filtered.length ? filtered.map(({ book, index }) =>
+        '<button class="book-index-item' + (activeBook === index ? ' active' : '') + '" data-book-index="' + index + '">' +
+        '<span class="book-index-number">' + String(index + 1).padStart(2, '0') + '</span>' +
+        '<span class="book-index-text"><strong>' + book.title + '</strong><small>' + book.author + '</small></span>' +
+        '<span class="book-index-arrow">‹</span></button>'
+      ).join('') : '<div class="empty-state">لا توجد كتب مطابقة.</div>') + '</div>';
+  }
+
+  function bookReaderMarkup(index) {
+    const book = books[index];
+    if (!book) return '<div class="empty-state">اختر كتاباً من الفهرس لبدء القراءة.</div>';
+    return '<article class="book-reader-content">' +
+      '<div class="book-reader-cover"><div class="cover-stain"></div><div class="cover-eyeline">THE SHADOW LIBRARY • ' + String(index + 1).padStart(2, '0') + '</div>' +
+      '<div class="cover-title">' + book.title + '</div><div class="cover-author">' + book.author + '</div><div class="cover-mark">✦</div></div>' +
+      '<div class="book-reader-meta"><span class="tag">' + book.category + '</span><span class="book-type">' + book.kind + '</span><span class="book-type">' + book.chapters.length + ' وحدات قراءة</span></div>' +
+      '<h2 class="book-reader-title">' + book.title + '</h2><div class="book-author-line">تأليف: ' + book.author + '</div>' +
+      '<p class="book-reader-intro">' + book.note + '</p>' +
+      '<div class="book-callout"><strong>طريقة استخدام هذا الملف</strong><p>هذه وحدات شرح ومراجعة أعدّتها الموسوعة حول أفكار الكتاب؛ ليست نقلاً حرفياً ولا ادعاءً بأنها فهرس الفصول الأصلي. اقرأ الأفكار نقدياً، وارجع إلى الكتاب للتحقق من السياق.</p></div>' +
+      '<div class="book-tools"><button class="book-tool-button" data-book-action="question">✧ سؤال مراجعة</button><button class="book-tool-button" data-book-action="fact">◈ فكرة أساسية</button><button class="book-tool-button" data-book-action="save">＋ أضف إلى دفتر التأمل</button></div>' +
+      '<div id="bookActionResult" class="book-action-result" hidden></div>' +
+      '<div class="book-toc"><div class="book-toc-heading">في هذا الملف</div>' + book.chapters.map((chapter, i) =>
+        '<a href="#book-chapter-' + i + '"><span>' + String(i + 1).padStart(2, '0') + '</span>' + chapter.title + '</a>'
+      ).join('') + '</div>' +
+      '<div class="book-chapters">' + book.chapters.map((chapter, i) =>
+        '<section class="book-chapter" id="book-chapter-' + i + '">' +
+        '<div class="chapter-overline">الوحدة ' + String(i + 1).padStart(2, '0') + ' / ' + book.chapters.length + '</div>' +
+        '<h3>' + chapter.title + '</h3><p>' + chapter.intro + '</p>' +
+        '<div class="chapter-example"><span>مثال من الحياة اليومية</span><p>' + chapter.example + '</p></div>' +
+        '<details class="chapter-reflection"><summary>سؤال للتفكير</summary><p>' + chapter.reflect + '</p></details>' +
+        '</section>'
+      ).join('') + '</div>' +
+      '<div class="book-end-note"><span>نهاية وحدات القراءة</span><p>الفهم ليس حفظ المصطلحات؛ بل القدرة على اختبار الفكرة، رؤية حدودها، وتطبيقها دون إيذاء الآخرين.</p></div>' +
+      '</article>';
+  }
+
+  function updateBookIndex() {
+    const index = $('#bookIndexList');
+    if (index) index.innerHTML = bookIndexMarkup();
+    const filters = $('#bookFilters');
+    if (filters) filters.innerHTML = bookFiltersMarkup();
+    const count = $('#bookCount');
+    if (count) count.textContent = books.length + ' كتاباً';
+  }
+
+  function selectBook(index) {
+    activeBook = index;
+    const reader = $('#bookReader');
+    if (reader) reader.innerHTML = bookReaderMarkup(index);
+    updateBookIndex();
+    const search = $('#bookSearch');
+    if (search && search.value !== bookSearchTerm) search.value = bookSearchTerm;
+  }
+
   function libraryPage() {
-    return sectionHeading('القراءة • مراجع مختارة', 'مكتبة الظلال', 'كتب في التأثير واتخاذ القرار والعلاقات والتفاوض. نميّز بين البحث العلمي والكتب التوعوية أو العملية، ولا نعامل أي كتاب كمرجع تشخيصي.') +
-      '<div class="card-grid">' + books.map((book, i) =>
-        '<article class="content-card book-card"><div class="book-spine"><span>' + book.title + '</span></div><div class="book-meta">' + book.category + ' • ' + book.author + '</div><h3>' + book.title + '</h3><p>' + book.note + '</p><span class="tag">ملاحظة قراءة نقدية</span></article>'
-      ).join('') + '</div><p class="note-hint">ملاحظة: هذه قائمة بداية منتقاة، وسنضيف المراجع الأخرى بعد تدقيق العناوين وبيانات المؤلفين حتى لا ننسب كتاباً إلى مؤلف خطأ.</p>';
+    activeBook = Math.min(activeBook, books.length - 1);
+    return sectionHeading('قاعدة معرفة • قراءة وتحليل', 'مكتبة الظلال', 'مكتبة منظمة لفهم القوة والتأثير والعقل والعلاقات. اختر كتاباً من الفهرس، ثم تنقّل بين وحدات القراءة والأمثلة والأسئلة.') +
+      '<div class="library-toolbar"><div class="library-search-wrap"><span>⌕</span><input id="bookSearch" type="search" placeholder="ابحث باسم الكتاب أو المؤلف أو الموضوع..." value="' + bookSearchTerm.replace(/"/g, '&quot;') + '"></div><span class="library-count" id="bookCount">' + books.length + ' كتاباً</span></div>' +
+      '<div class="book-filters" id="bookFilters">' + bookFiltersMarkup() + '</div>' +
+      '<div class="book-workspace"><aside class="book-index" id="bookIndexList">' + bookIndexMarkup() + '</aside><main class="book-reader" id="bookReader">' + bookReaderMarkup(activeBook) + '</main></div>' +
+      '<p class="library-disclaimer">ملاحظة تحريرية: الكتب ذات الطابع الشعبي أو الاستراتيجي معروضة بوصفها أفكاراً للنقد والتحليل، لا حقائق علمية نهائية أو وصفات للسيطرة على الآخرين. أسماء الوحدات أعلاه من إعداد الموسوعة.</p>';
   }
 
   function notesPage() {
@@ -521,6 +720,43 @@
       return showToast('تم حفظ ملاحظاتك على هذا الجهاز.');
     }
 
+    const bookIndexButton = event.target.closest('[data-book-index]');
+    if (bookIndexButton) return selectBook(Number(bookIndexButton.dataset.bookIndex));
+
+    const bookFilterButton = event.target.closest('[data-book-filter]');
+    if (bookFilterButton) {
+      activeBookFilter = bookFilterButton.dataset.bookFilter;
+      updateBookIndex();
+      const available = books.map((book, index) => ({ book, index })).filter(({ book }) =>
+        (activeBookFilter === 'الكل' || book.category === activeBookFilter) &&
+        (book.title + ' ' + book.author + ' ' + book.category + ' ' + book.note).toLowerCase().includes(bookSearchTerm.toLowerCase())
+      );
+      if (!available.some(item => item.index === activeBook)) {
+        if (available.length) selectBook(available[0].index);
+        else if ($('#bookReader')) $('#bookReader').innerHTML = '<div class="empty-state">لا توجد نتيجة ضمن هذا التصنيف.</div>';
+      }
+      return;
+    }
+
+    const bookAction = event.target.closest('[data-book-action]');
+    if (bookAction) {
+      const book = books[activeBook];
+      const result = $('#bookActionResult');
+      if (!result || !book) return;
+      const chapter = book.chapters[Math.floor(Math.random() * book.chapters.length)];
+      result.hidden = false;
+      if (bookAction.dataset.bookAction === 'question') {
+        result.innerHTML = '<strong>سؤال مراجعة</strong><p>' + chapter.reflect + '</p>';
+      } else if (bookAction.dataset.bookAction === 'fact') {
+        result.innerHTML = '<strong>فكرة من هذا الملف</strong><p>' + chapter.intro + '</p><small>ملخص تعليمي من إعداد الموسوعة، وليس اقتباساً حرفياً.</small>';
+      } else {
+        const note = 'مكتبة الظلال — ' + book.title + '\n' + chapter.title + '\n' + chapter.reflect + '\n';
+        localStorage.setItem('darkBookNotes', (localStorage.getItem('darkBookNotes') || '') + '\n\n' + note);
+        result.innerHTML = '<strong>أضيفت الفكرة إلى دفتر التأمل</strong><p>يمكنك فتح دفتر التأمل وتعديل ملاحظاتك.</p>';
+      }
+      return;
+    }
+
     const searchResult = event.target.closest('[data-search-index]');
     if (searchResult) {
       const item = $('#searchResults')._items[Number(searchResult.dataset.searchIndex)];
@@ -536,6 +772,12 @@
   }
 
   document.addEventListener('click', handleClick);
+  document.addEventListener('input', event => {
+    if (event.target && event.target.id === 'bookSearch') {
+      bookSearchTerm = event.target.value.trim();
+      updateBookIndex();
+    }
+  });
   $('#searchOpen').addEventListener('click', openSearch);
   $('#modalClose').addEventListener('click', closeModal);
   modalBackdrop.addEventListener('click', event => { if (event.target === modalBackdrop) closeModal(); });
