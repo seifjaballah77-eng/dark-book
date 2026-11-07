@@ -891,7 +891,7 @@
     if (!filtered.length) return '<div class="empty-state">لا توجد آليات مطابقة. جرّب كلمة أخرى.</div>';
     return filtered.map(item =>
       '<details class="protocol-card" id="protocol-' + item.id + '"><summary><span class="protocol-card-num">' + String(item.id).padStart(2, '0') + '</span><span class="protocol-card-title"><strong>' + item.title + '</strong><small>المرحلة ' + item.phase + ' • ' + item.evidence + '</small></span><span class="protocol-card-arrow">＋</span></summary>' +
-      '<div class="protocol-card-body"><div class="protocol-evidence"><b>ما الفكرة؟</b><p>' + item.definition + '</p></div>' +
+      '<div class="protocol-card-body"><a class="protocol-full-link" href="#protocol/' + item.id + '">افتح الصفحة الموسوعية الكاملة ↗</a><div class="protocol-evidence"><b>ما الفكرة؟</b><p>' + item.definition + '</p></div>' +
       '<div class="protocol-research"><b>ما الذي يقوله البحث؟</b><p>' + item.research + '</p></div>' +
       '<div class="protocol-overclaim"><b>ما المبالغة أو الخطأ؟</b><p>' + item.overclaim + '</p></div>' +
       '<div class="protocol-signs"><b>إشارات تستحق الانتباه</b><ul>' + item.signs.map(sign => '<li>' + sign + '</li>').join('') + '</ul></div>' +
@@ -1386,7 +1386,7 @@
     const toc = sections.map((section, i) => {
       const found = section.match(/id="([^"]+)"/);
       const heading = section.match(/<h2>([\s\S]*?)<\/h2>/);
-      return '<a href="#' + (found ? found[1] : '') + '"><span>' + String(i + 1).padStart(2, '0') + '</span>' + (heading ? heading[1] : '') + '</a>';
+      return '<a href="#' + type + '/' + id + '/' + (found ? found[1] : '') + '"><span>' + String(i + 1).padStart(2, '0') + '</span>' + (heading ? heading[1] : '') + '</a>';
     }).join('');
 
     let parentRoute = type === 'lesson' ? 'learn' : type === 'pattern' ? 'spot' : type === 'protocol' ? 'protocol' : type === 'cyber' ? 'cyber' : 'library';
@@ -1444,7 +1444,11 @@
     $('#mobileOverlay').classList.remove('show');
     if (activeNav === 'notes' && $('#userNotes')) $('#userNotes').value = localStorage.getItem('darkBookNotes') || '';
     pageContent.focus({ preventScroll: true });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (route[2]) {
+      const targetSection = document.getElementById(route[2]);
+      if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   const renderers = {
@@ -1729,7 +1733,7 @@
 
   function smokeTargetFor(node) {
     if (!node || !node.closest) return null;
-    return node.closest('button,a,summary,h1,h2,h3,.content-card,.panel,.stat-card,.protocol-stage,.cyber-lab-card,.book-reader-cover,.long-article-section');
+    return node.closest('button,a,summary,h1,h2,h3,p,li,.content-card,.panel,.stat-card,.protocol-stage,.cyber-lab-card,.book-reader-cover,.long-article-section');
   }
 
   function updateSmokeTarget(target) {
