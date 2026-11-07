@@ -18,6 +18,9 @@
     cases: 'القضايا التفاعلية',
     lab: 'مختبر العقل',
     cyber: 'الأمن السيبراني والمختبر العملي',
+    lesson: 'صفحة الدرس',
+    book: 'صفحة الكتاب',
+    pattern: 'ملف نمط سلوكي',
     protocol: 'خريطة التأثير النفسي',
     quiz: 'اختبر ملاحظتك',
     library: 'مكتبة الكتب',
@@ -372,7 +375,13 @@
   }
 
   function eyeArt() {
-    return '<img class="eye-art" src="./assets/hidden-eye.svg" alt="">';
+    return '<svg class="eye-art shadow-eye" viewBox="0 0 480 260" role="img" aria-label="عين رمزية تتحرك حدقتها مع مؤشر الفأرة">' +
+      '<defs><radialGradient id="eyeIris"><stop stop-color="#f2d7ff"/><stop offset=".17" stop-color="#b45cff"/><stop offset=".62" stop-color="#38134f"/><stop offset="1" stop-color="#08060c"/></radialGradient></defs>' +
+      '<path d="M20 130C79 28 156 12 240 12s161 16 220 118c-59 102-136 118-220 118S79 232 20 130Z" fill="#09070d" stroke="#a855f7" stroke-opacity=".6" stroke-width="2"/>' +
+      '<path d="M73 130c47-58 103-83 167-83s120 25 167 83c-47 58-103 83-167 83S120 188 73 130Z" fill="#120d1a" stroke="#d3a0f4" stroke-opacity=".7" stroke-width="2"/>' +
+      '<g id="shadowPupil"><ellipse cx="240" cy="130" rx="53" ry="58" fill="url(#eyeIris)" stroke="#d5a3f7" stroke-width="2"/><ellipse cx="240" cy="130" rx="17" ry="38" fill="#030207"/><circle cx="221" cy="105" r="7" fill="#fff" opacity=".85"/></g>' +
+      '<path d="M92 130c39-39 89-60 148-60s109 21 148 60" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="2"/>' +
+      '</svg>';
   }
 
   function heroArt() {
@@ -1143,6 +1152,301 @@
       '<div style="margin-top:17px;color:#777482;font-size:9px">تصميم وتطوير: سيف • إصدار أولي تجريبي</div>';
   }
 
+  function articleEsc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, char => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[char]));
+  }
+
+  function articleContext(type, item, id) {
+    let title = '', category = '', intro = '', core = '', evidence = '', caution = '', example = '', practice = '', facts = [], reference = '';
+    if (type === 'lesson') {
+      title = item.title; category = item.category; intro = item.summary; core = item.body;
+      facts = item.points || []; practice = item.practice;
+      evidence = 'يجب قراءة الأدلة بحسب المفهوم والسياق والمنهج. هذا الملف تعليمي ولا يحوّل تجربة منفردة إلى قاعدة عامة.';
+      caution = 'لا يستخدم الدرس لقراءة النوايا أو تشخيص الأشخاص. السلوك الواحد قد تكون له تفسيرات متعددة.';
+      example = facts[0] || intro;
+    } else if (type === 'pattern') {
+      title = item.title; category = item.tag; intro = item.desc; core = item.desc;
+      facts = item.signs || []; practice = item.response;
+      evidence = 'هذه مادة توعية عن نمط سلوكي وليست أداة تشخيص. يجب النظر إلى التكرار والسياق والأثر واختلال القوة.';
+      caution = 'تجنب إطلاق أوصاف ثابتة على الناس من موقف واحد. ركز على الأفعال القابلة للملاحظة والسلامة والحدود.';
+      example = facts.slice(0,2).join('؛ ');
+    } else if (type === 'protocol') {
+      title = item.title; category = 'المرحلة ' + item.phase + ' • ' + item.evidence;
+      intro = item.definition; core = item.research; facts = item.signs || [];
+      practice = item.defense; evidence = item.research; caution = item.overclaim;
+      example = item.example; reference = item.source;
+    } else if (type === 'cyber') {
+      title = item.title; category = 'الأمن السيبراني • ' + item.level + ' • ' + item.time;
+      intro = item.intro; core = (item.lessons || []).join(' ');
+      facts = item.lessons || []; practice = item.exercise;
+      evidence = 'يعتمد هذا الدرس على مبادئ دفاعية في أمن المعلومات. يجب أن يبقى التطبيق ضمن أجهزتك أو بيئة اختبار لديك تفويض واضح لها.';
+      caution = 'لا تختبر أنظمة عامة أو حسابات أشخاص آخرين دون إذن مكتوب ونطاق واضح. لا تدخل بيانات اعتماد حقيقية في النماذج التعليمية.';
+      example = facts[0] || intro;
+    } else {
+      title = item.title; category = item.category + ' • ' + item.kind;
+      intro = item.note; core = (item.chapters || []).map(chapter => chapter.intro).join(' ');
+      facts = (item.chapters || []).map(chapter => chapter.example);
+      practice = (item.chapters || []).map(chapter => chapter.reflect).join(' ');
+      evidence = 'هذه صفحة قراءة نقدية للأفكار المرتبطة بالكتاب. الكتاب الشعبي أو العملي ليس تلقائياً دليلاً تجريبياً، والشرح لا يحل محل النص الأصلي.';
+      caution = 'ميّز بين ما يقدمه المؤلف كبحث، وما يقدمه كقصة أو رأي أو نموذج تفسيري. ارجع إلى المراجع التي يستند إليها الكتاب.';
+      example = facts[0] || intro; reference = item.author;
+    }
+    return { type, id, title, category, intro, core, evidence, caution, example, practice, facts, reference };
+  }
+
+  function articleSection(id, kicker, title, paragraphs, extra) {
+    return '<section class="long-article-section" id="' + id + '">' +
+      '<div class="article-kicker">' + kicker + '</div><h2>' + title + '</h2>' +
+      (paragraphs || []).map(text => '<p>' + text + '</p>').join('') +
+      (extra || '') + '</section>';
+  }
+
+  function articleList(items) {
+    return '<ul class="article-rich-list">' + items.map(item => '<li>' + item + '</li>').join('') + '</ul>';
+  }
+
+  function buildLongArticle(type, item, id) {
+    const d = articleContext(type, item, id);
+    const facts = d.facts.length ? d.facts : [d.intro, d.practice];
+    const a = facts[0] || d.intro, b = facts[1] || d.core, c = facts[2] || d.practice, e = facts[3] || d.caution;
+    const sections = [];
+    const isCyber = type === 'cyber';
+    const isProtocol = type === 'protocol';
+    const isBook = type === 'book';
+    const isPattern = type === 'pattern';
+
+    sections.push(articleSection('article-overview','00 • بطاقة الدرس','ما الذي ستتعلمه؟',[
+      'هذا الملف مخصص لفهم موضوع «' + d.title + '» بصورة منظمة ومتأنية. الغرض ليس حفظ مصطلح ثم استخدامه للحكم على الآخرين، بل اكتساب طريقة تفكير تساعدك على وصف ما يحدث، وفحص الأدلة، واختيار استجابة واعية.',
+      d.intro,
+      'سننتقل من التعريف إلى السياق، ثم نفكك العناصر والآليات والأمثلة، ونراجع الأخطاء الشائعة، وننهي بخطوات عملية وأسئلة مراجعة. يمكنك قراءة الملف كاملاً أو الانتقال بين فصوله عبر الفهرس الجانبي.'
+    ], '<div class="article-summary-strip"><span>ملف موسوعي مطوّل</span><span>شرح + أمثلة + تطبيق</span><span>رابط مستقل قابل للمشاركة</span></div>'));
+
+    sections.push(articleSection('article-definition','01 • التعريف','التعريف الدقيق وحدود المصطلح',[
+      d.core,
+      'من المهم فصل ثلاثة مستويات: ما نلاحظه فعلاً، وما نستنتجه من الملاحظة، وما نحتاج إلى دليل إضافي لإثباته. الوصف الدقيق يبدأ بما يمكن التحقق منه، ولا يقفز إلى النية أو الدافع دون قرائن.',
+      'التعريف الجيد لا يشرح الظاهرة فقط، بل يحدد أيضاً ما لا يدخل ضمنها. قد يكون السلوك عابراً بسبب التعب أو الضغط أو اختلاف العادات. يجب أن يكون للاستنتاج حدود واضحة، وأن يبقى قابلاً للمراجعة عندما تظهر معلومات جديدة.'
+    ]));
+
+    sections.push(articleSection('article-background','02 • الخلفية','الخلفية التاريخية والفكرية',[
+      'نشأت المفاهيم التي تتناول هذا الموضوع ضمن تاريخ من التجارب والملاحظات والنقاشات. بعضها بدأ في المختبر، وبعضها في الاقتصاد أو التفاوض أو الممارسة المهنية، وبعضها انتشر في الكتب الشعبية ثم توسع استعماله في الإعلام.',
+      'ذكر اسم باحث بجانب عبارة لا يجعل العبارة حقيقة علمية تلقائياً. ينبغي التحقق من الدراسة الأصلية، ومعرفة السؤال الذي اختبرته، والعينة التي استخدمتها، والنتيجة الفعلية، وما إذا كانت دراسات مستقلة قد دعمتها.',
+      'تاريخ ظهور المصطلح ليس هو نهاية تطوره. قد تظهر مراجعات لاحقة، أو تتغير طرق القياس، أو يختلف الباحثون حول مدى صلاحية التعميم. لذلك تعرض الموسوعة خلفية الفكرة وحدودها، ولا تقدمها كقانون ثابت.'
+    ]));
+
+    sections.push(articleSection('article-mechanism','03 • آلية العمل','كيف يمكن أن يؤثر هذا العامل في التفكير؟',[
+      'يعمل الإنسان وسط قيود الوقت والانتباه والذاكرة. نستخدم الخبرة السابقة واللغة والإشارات الاجتماعية والسياق لفهم المواقف بسرعة. هذه القدرات مفيدة، لكنها قد تجعل الحكم عرضة للأخطاء عندما تكون المعلومات ناقصة أو عندما يوجد ضغط يمنع التحقق.',
+      'التأثير النفسي احتمالي، ويتغير بحسب الخبرة والمعرفة والحالة الانفعالية والثقة بالمصدر والبدائل المتاحة. لا يعني وجود آلية أن العقل توقف عن التفكير، ولا يثبت أن شخصاً يستطيع تجاوز إرادة الآخر بعبارة واحدة.',
+      'قد تتفاعل عدة عوامل في موقف واحد، مثل صياغة العرض مع ضغط الوقت ومع مكانة المتحدث. لكن جمع عدة مفاهيم لا يصنع تلقائياً خطة سيطرة. الأفضل فصل كل عامل، ثم فحص أثره ودليله وتفسيرات أخرى ممكنة.'
+    ]));
+
+    sections.push(articleSection('article-vocabulary','04 • المصطلحات','المفاهيم الأساسية التي ينبغي تمييزها',[
+      'الملاحظة هي وصف ما وقع دون افتراض نية. والتفسير هو معنى محتمل نحاول استخلاصه من الملاحظة. والسياق يشمل ظروف الموقف والعلاقة والقواعد والموارد والوقت والثقافة.',
+      'النمط يعني تكراراً ذا معنى عبر مواقف مختلفة، وليس حادثة منفردة. والأثر هو ما يترتب على السلوك في الاختيار والخصوصية والسلامة والرفاه. أما قوة الدليل فتصف مقدار دعم المعلومات للاستنتاج.',
+      'في المجالات التقنية، نميّز كذلك بين الأصل الذي نحميه، والتهديد الذي قد يسبب الضرر، والثغرة التي يمكن أن تسهّل حدوثه، والضابط الذي يقلل الاحتمال أو الأثر. لا تخلط بين وجود ثغرة ووقوع اختراق فعلي.'
+    ], articleList([
+      '<b>الملاحظة:</b> ما يمكن وصفه والتحقق منه.',
+      '<b>التفسير:</b> معنى محتمل قابل للمراجعة.',
+      '<b>السياق:</b> الظروف التي تغير فهم الحدث.',
+      '<b>النمط:</b> تكرار موثق عبر الزمن.',
+      '<b>الدليل:</b> معلومات تدعم الادعاء بدرجات متفاوتة.'
+    ])));
+
+    sections.push(articleSection('article-components','05 • العناصر','العناصر التي تكوّن الصورة الكاملة',[
+      'ابدأ بتحديد الأطراف والهدف المعلن والمعلومات المتاحة لكل طرف. اسأل من يملك حق الاختيار، ومن يتحمل التكلفة، ومن يستطيع التوقف أو طلب المشورة. هذه الأسئلة تكشف اختلال القوة بصورة أوضح من محاولة تخمين ما يدور في ذهن شخص.',
+      'افحص طريقة التواصل: هل طُرحت الشروط بوضوح؟ هل توجد مساحة للأسئلة؟ هل يستطيع أي طرف قول «لا» دون عقوبة؟ هل تتغير القواعد بعد الموافقة؟ هل توجد وثيقة يمكن الرجوع إليها؟',
+      'افحص النتائج مع مرور الوقت. قد يبدو الطلب بسيطاً في البداية، لكن أثره الحقيقي يظهر عند تكراره أو اتساع نطاقه. وفي الأنظمة التقنية، قد تكون الإعدادات الافتراضية أو الصلاحيات الواسعة سبباً في تضخم الخطر رغم أن كل خطوة تبدو صغيرة.'
+    ], articleList([
+      'الهدف المعلن والنتيجة التي يمكن التحقق منها.',
+      'المعلومات التي يعرفها كل طرف وما ينقصه.',
+      'الوقت المتاح ووجود ضغط أو استعجال.',
+      'البدائل الواقعية وإمكانية التوقف أو الانسحاب.',
+      'الأثر الفعلي على الخصوصية والموارد والاستقلال.'
+    ])));
+
+    sections.push(articleSection('article-examples','06 • الأمثلة','أمثلة من الحياة اليومية والعمل',[
+      'المثال الأول: تتلقى عرضاً أو طلباً من شخص تثق به. يقدّم الفكرة بثقة ثم يطلب رداً سريعاً. تشعر أن الرفض محرج وأن القبول هو أسهل طريقة لإنهاء اللحظة. لا تفترض نية خفية فوراً، لكن لاحظ أن طلب القرار سبق اكتمال المعلومات.',
+      'المثال الثاني: يظهر ادعاء واحد في عدد كبير من المنشورات. يصبح مألوفاً، لكن كثرة الظهور لا تثبت صحته. ابحث عن المصدر الأول، وتاريخ المعلومات، والجهة التي تتحمل مسؤولية الدليل.',
+      isCyber ? 'المثال الثالث في الأمن الرقمي: يصل إشعار يطلب رمز تحقق أو كلمة مرور. حتى لو كان الشعار واللغة مقنعين، لا ترسل السر عبر الرسالة. افتح الخدمة بنفسك من التطبيق أو العنوان الرسمي الذي تعرفه.' : 'المثال الثالث في العلاقات: يختلف شخصان على تفاصيل حدث سابق. قد يكون ذلك اختلافاً عادياً في الذاكرة. يصبح الأمر أكثر إثارة للقلق عندما يتكرر الإنكار والتحريف بهدف إسكات الأسئلة أو عزل أحد الطرفين عن مصادر التحقق.',
+      'في جميع الأمثلة، يكون السؤال الأهم: ما الوقائع التي أستطيع التحقق منها؟ وما المعلومات التي أحتاج إليها قبل اتخاذ قرار؟'
+    ]));
+
+    sections.push(articleSection('article-analysis','07 • التحليل','تحليل الموقف خطوة بخطوة',[
+      'الخطوة الأولى هي كتابة الوقائع. ما العبارة التي قيلت؟ ما الطلب؟ ما الموعد؟ ما المعلومات التي قُدمت؟ لا تضف في هذه المرحلة أحكاماً مثل «هو يريد السيطرة» أو «أنا ساذج»، لأنها تخلط بين الملاحظة والاستنتاج.',
+      'الخطوة الثانية هي تحديد ما ينقصك. هل تعرف التكلفة الكاملة؟ هل يوجد عقد أو سياسة؟ هل يمكن التحقق من المصدر؟ هل يوجد سجل أو دليل زمني؟ كل سؤال محدد يقلل الغموض ويجعل القرار قابلاً للمراجعة.',
+      'الخطوة الثالثة هي تقييم الأثر والخيارات. ما الذي يحدث إذا وافقت؟ ما الذي يحدث إذا رفضت؟ هل توجد نتيجة وسطية؟ هل يمكنك تأجيل القرار؟ إذا ظهر خطر كبير أو تهديد مباشر، اطلب دعماً مناسباً بدلاً من الاكتفاء بتحليل المصطلحات.'
+    ]));
+
+    sections.push(articleSection('article-context','08 • السياق','لماذا تختلف الاستجابة من شخص إلى آخر؟',[
+      'لا يستجيب الناس للمواقف بالطريقة نفسها. تؤثر الخبرة السابقة والمعرفة واللغة والثقافة والتعب والحالة الانفعالية وطبيعة العلاقة في فهم الرسالة. قد يجد شخص أن الصمت مساحة للتفكير، بينما يراه آخر علامة غضب.',
+      'اختلال القوة يغير معنى الاختيار. قرار الموظف أمام مديره ليس دائماً مثل قرار صديقين متساويين في القدرة على الرفض. وقد تختلف تجربة المستخدم عندما يكون التطبيق ضرورياً للوصول إلى عمله أو أمواله.',
+      'لا تستخدم استنتاجاً واحداً لكل الناس. اسأل عن ظروف الشخص، وامنحه فرصة لتوضيح ما فهمه، ولا تجعل اختلاف الاستجابة دليلاً على ضعف أو سذاجة أو نية خبيثة.'
+    ]));
+
+    sections.push(articleSection('article-warning','09 • إشارات التحذير','مؤشرات تستحق التوقف والفحص',[
+      'تظهر الإشارات المهمة غالباً في التكرار: إخفاء المعلومات، أو تحويل السؤال إلى اتهام، أو ربط الرفض بالعقوبة، أو منع المقارنة، أو تغيير الشروط بعد الاتفاق. أما المؤشر المنفرد فيحتاج إلى سياق ولا يكفي لإثبات نية.',
+      'انتبه إلى أثر الموقف عليك. هل أصبحت تخاف من السؤال؟ هل تتنازل عن خصوصيتك؟ هل تشعر أنك لا تستطيع مراجعة قرار سابق؟ هل تقلصت دائرة الأشخاص الذين يمكنك استشارتهم؟ هذه آثار عملية تستحق الاهتمام.',
+      isCyber ? 'في الأنظمة الرقمية، راقب محاولات الدخول غير المعتادة، والصلاحيات غير الضرورية، والتحديثات المتأخرة، والروابط التي تطلب أسراراً، والتنبيهات التي لا تتوافق مع نشاطك. التنبيه لا يثبت الاختراق؛ لكنه يحدد ما يستحق المراجعة.' : 'إذا ظهر تهديد مباشر أو ابتزاز أو خطر على السلامة، لا تركز على تسمية الظاهرة. الأولوية هي الوصول إلى دعم آمن ومناسب، وحفظ الأدلة بطريقة لا تزيد الخطر.'
+    ], articleList(d.facts.map(item => articleEsc(item)))));
+
+    sections.push(articleSection('article-misconceptions','10 • تصحيح المفاهيم','أخطاء شائعة في فهم الموضوع',[
+      'الخطأ الأول هو تحويل الارتباط إلى سبب. إذا تكرر أمران معاً فهذا لا يثبت أن أحدهما تسبب في الآخر. نحتاج إلى تصميم بحث مناسب أو قرائن أقوى قبل ادعاء السببية.',
+      'الخطأ الثاني هو استخدام المفهوم كملصق للشخص أو النظام. من الأفضل وصف السلوك بدقة، مثل «طلب مني مشاركة رمز التحقق» أو «منح التطبيق صلاحية لا يحتاج إليها» بدلاً من الاكتفاء بعبارة عامة.',
+      'الخطأ الثالث هو الاعتقاد بأن كل تقنية تؤثر بالطريقة نفسها على الجميع. النتائج تتغير بحسب المهمة والسياق والفروق الفردية. لا تصدق الأرقام السحرية أو الوعود التي تزعم نتائج مضمونة.'
+    ]));
+
+    sections.push(articleSection('article-research','11 • الأدلة','كيف نقيم الدليل والمصدر؟',[
+      d.evidence,
+      'ابدأ بالسؤال: هل المصدر دراسة أصلية، أم مراجعة علمية، أم كتاب تطبيقي، أم منشور على الإنترنت؟ راجع تاريخ النشر والعينة والقياسات والمنهج وحدود التعميم، واسأل ما إذا كانت النتيجة قد تكررت بصورة مستقلة.',
+      'المراجعة المنهجية والتحليل التجميعي قد يعطيان صورة أوسع من تجربة واحدة، لكنهما لا يلغيان الاختلاف بين الدراسات. أما في الأمن الرقمي، فالمعيار يشمل التوثيق القابل لإعادة الاختبار، وتحديد النسخة والإعدادات والنطاق.'
+    ]));
+
+    sections.push(articleSection('article-limits','12 • حدود المعرفة','ما الذي لا نستطيع استنتاجه؟',[
+      d.caution,
+      'لا يمكن معرفة نية شخص بصورة مؤكدة من تعبير وجه أو وضعية جلوس أو تأخر في الرد. وفي الأمن السيبراني، لا يمكن اعتبار فشل تسجيل دخول واحد دليلاً قاطعاً على هجوم؛ فقد يكون خطأ مستخدم أو خدمة قديمة أو جهازاً جديداً.',
+      'كما لا يمكن تحويل شرح تثقيفي إلى تشخيص سريري أو تقرير أمني نهائي. إذا كان الموضوع يتعلق بصحتك أو سلامتك أو بنظام إنتاجي مهم، فاستعن بمختص ذي مؤهلات مناسبة.'
+    ]));
+
+    sections.push(articleSection('article-risk','13 • عوامل الخطر','متى تزداد احتمالات الخطأ أو الضرر؟',[
+      'قد يصبح الحكم أصعب عند الإرهاق أو الخوف أو العزلة أو ضيق الوقت أو نقص المعلومات أو الاعتماد الكبير على طرف واحد. هذا لا يعني أن الشخص مسؤول عن إساءة الآخرين إليه؛ بل يعني أن الظروف قد تقلل المساحة المتاحة للتفكير.',
+      'في الأنظمة التقنية، ترتفع المخاطر عندما تتراكم الصلاحيات الواسعة مع غياب التحديثات والنسخ الاحتياطية وضعف المراقبة وعدم وجود خطة استجابة. لا يكفي تثبيت أداة واحدة إذا بقيت بقية الضوابط غائبة.',
+      'قد يزيد الضغط عندما يتداخل أكثر من عامل: قرار كبير، وموعد غير واضح، وطرف يملك المعلومات، ورفض إعطاء وقت للمراجعة. عندها يكون التوقف وطلب رأي مستقل إجراءً عقلانياً.'
+    ]));
+
+    sections.push(articleSection('article-defense','14 • خط الدفاع','خطة حماية عملية من سبع خطوات',[
+      'ابدأ بإيقاف الضغط عندما تستطيع. اطلب مهلة، وانتقل إلى مكان آمن إذا لزم، ولا تتخذ قراراً كبيراً أثناء الخوف أو الإرهاق.',
+      'اجمع المعلومات من مصدر مستقل. لا تستخدم الرابط أو الرقم الوارد في الرسالة المشبوهة نفسها. وفي الأنظمة التقنية، افحص السجلات والنسخ والإعدادات وفق صلاحياتك ونطاق العمل المصرح به.',
+      'اكتب الوقائع والأسئلة، وحدد ما الذي فهمته وما الذي لا يزال غامضاً. قارن البدائل والتكاليف، وتحدث مع شخص مستقل لا يستفيد من قرارك.',
+      'اتخذ قراراً قابلاً للمراجعة إن أمكن، واحتفظ بنسخة من الاتفاق أو سجل التغيير. وإذا اكتشفت خطأً، صحح المسار بدلاً من الاستمرار حفاظاً على الاتساق.'
+    ], articleList([
+      'توقف وخذ وقتاً مناسباً.',
+      'تحقق عبر مصدر مستقل.',
+      'افصل الوقائع عن التأويلات.',
+      'اطلب الشروط والمعلومات مكتوبة.',
+      'راجع الصلاحيات والحدود.',
+      'استشر شخصاً مستقلاً موثوقاً.',
+      'اطلب المساعدة عند وجود تهديد أو ضرر.'
+    ])));
+
+    sections.push(articleSection('article-practice','15 • التطبيق','تطبيق عملي متدرج',[
+      'اختر موقفاً منخفض المخاطر، واكتب وصفاً محايداً من ثلاثة أسطر. لا تبدأ بموقف خطير أو اختبار نظام لا تملكه. الهدف تدريب طريقة التفكير في بيئة آمنة.',
+      'اكتب تفسيرين محتملين على الأقل، ثم حدد معلومة يمكنها التمييز بينهما. ربما تحتاج إلى سؤال أو وثيقة أو مقارنة أو سجل أو مراجعة مصدر مستقل.',
+      'حدد الحد الذي تريد الحفاظ عليه، وصغ طلباً واضحاً. بعد ذلك راجع النتيجة: هل حصلت على معلومات أفضل؟ هل احترم الطرف الآخر حقك في السؤال؟ ما الذي ستفعله بصورة مختلفة في المرة القادمة؟'
+    ], '<div class="article-exercise"><strong>دفتر التطبيق</strong><p>سجّل الملاحظة، والتفسير البديل، والمعلومة التي تحتاج إلى التحقق منها. لا تكتب كلمات مرور أو بيانات شخصية حساسة.</p><textarea id="articleExercise" placeholder="الملاحظة...&#10;تفسير بديل...&#10;ما الذي سأتحقق منه؟" rows="6"></textarea><button class="primary-btn" data-save-exercise>احفظ التمرين في دفتر التأمل</button><span id="articleExerciseStatus" aria-live="polite"></span></div>'));
+
+    sections.push(articleSection('article-case','16 • دراسة حالة','تفكيك حالة مركّبة',[
+      'في هذه الحالة، يطلب شخص من زميله اتخاذ قرار سريع بشأن مشروع مشترك. يعرض مزايا المشروع، لكنه لا يذكر التكاليف غير المباشرة أو شروط الانسحاب. وعندما يسأل الزميل عن التفاصيل، يقال له إن كثرة الأسئلة تعني أنه لا يثق بالفريق.',
+      'نلاحظ هنا ثلاثة أشياء يمكن التحقق منها: ضغط الوقت، ونقص المعلومات، وتحويل السؤال إلى اختبار للولاء. لا نحتاج إلى افتراض أن صاحب العرض يمتلك خطة نفسية معقدة؛ يكفي وصف السلوك وتحديد المعلومات الغائبة.',
+      'الاستجابة العملية هي طلب الميزانية والمهام والالتزامات وشروط الإلغاء مكتوبة، مع وقت للمراجعة. إذا رُفضت الشفافية، يمكن رفض المشاركة أو طلب رأي مستقل. القرار الحذر لا يحتاج إلى إثبات نية خفية.'
+    ]));
+
+    sections.push(articleSection('article-checklist','17 • قائمة المراجعة','قبل أن توافق أو تنفذ',[], articleList([
+      'هل فهمت الطلب أو الهدف والالتزامات كاملة؟',
+      'هل لدي وقت كافٍ للمراجعة؟',
+      'هل أعرف المخاطر والتكاليف والنتائج المحتملة؟',
+      'هل أستطيع قول لا أو إيقاف التجربة بأمان؟',
+      'هل يوجد مصدر مستقل للتحقق؟',
+      'هل أشارك بيانات أو صلاحيات أكثر مما يلزم؟',
+      'هل وثقت ما سأفعله وكيف سأراجع النتيجة؟'
+    ])));
+
+    sections.push(articleSection('article-ethics','18 • الجانب الأخلاقي','الفرق بين الاستخدام المشروع والاستغلال',[
+      'التأثير المشروع يوضح المعلومات، ويعترف بالمخاطر، ويترك مساحة للرفض، ويقبل تصحيح الفهم. وهو حاضر في التعليم والتفاوض والحملات الصحية والعلاقات اليومية.',
+      'أما الاستغلال فيخفي معلومات جوهرية أو يستخدم الخوف والذنب أو يخلق تبعية أو يعاقب الرفض. وفي التقنية، يعني الاستخدام غير المشروع تجاوز التفويض أو الوصول إلى بيانات الآخرين أو إحداث تعطيل.',
+      'استخدم المهارات لتحسين التعاون وحماية الأنظمة والناس. لا تجعل النجاح مرادفاً لأن يفعل الطرف الآخر ما تريده بأي ثمن، ولا تجعل الاختبار التقني مبرراً لتجاوز الملكية أو الخصوصية.'
+    ]));
+
+    sections.push(articleSection('article-protocol','19 • الإجراء المتقدم','بناء إجراء يمكن مراجعته',[
+      'حوّل الفكرة إلى خطوات قابلة للتحقق. حدّد الهدف، والنطاق، والمسؤول، والمعلومات اللازمة، ومعيار النجاح، ومتى يجب التوقف. هذا الأسلوب يمنع الخلط بين النوايا الجيدة والنتائج الفعلية.',
+      'وثّق القرارات المهمة بطريقة تحفظ الخصوصية. سجل التاريخ والسياق وما تم الاتفاق عليه، ولا تجمع معلومات حساسة أكثر مما تحتاج. في العمل التقني، احفظ سجل التغيير ونتائج الاختبار وملاحظات المعالجة.',
+      'بعد التنفيذ، راجع النتيجة وحدد ما الذي نجح وما الذي لم ينجح. لا تخفِ الخطأ، ولا تعِد تسمية الضرر على أنه نجاح. التعلم الجيد يتطلب الاعتراف بالحدود وإصلاح ما يمكن إصلاحه.'
+    ]));
+
+    sections.push(articleSection('article-questions','20 • أسئلة المراجعة','اختبر فهمك بعمق',[
+      'ما الفرق بين الملاحظة والتفسير في هذا الدرس؟ اكتب مثالاً يوضح الاثنين دون افتراض نية الطرف الآخر.',
+      'ما الظروف التي قد تجعل التأثير أكبر أو أصغر؟ وهل توجد عوامل بديلة يمكن أن تفسر السلوك أو النتيجة نفسها؟',
+      'ما الادعاء الذي يحتاج إلى دليل أقوى؟ وما المصدر المستقل الذي يمكن الرجوع إليه؟',
+      'كيف تحمي حقك في الوقت والخصوصية والرفض؟ وما العبارة أو الإجراء الذي ستستخدمه عند الضغط؟',
+      'ما المعلومة التي لو ظهرت قد تجعلك تغير رأيك؟ القدرة على مراجعة الاعتقاد علامة قوة في التفكير وليست ضعفاً.'
+    ]));
+
+    sections.push(articleSection('article-glossary','21 • قاموس مصغّر','مصطلحات ينبغي أن تبقى واضحة',[
+      'الارتباط يعني وجود علاقة بين متغيرين، ولا يثبت وحده أن أحدهما سبب الآخر. والسببية ادعاء يحتاج إلى تصميم أو قرائن تسمح باستبعاد التفسيرات البديلة.',
+      'التحيز هو ميل منهجي قد يؤثر في الانتباه أو التفسير أو القرار، ولا يعني بالضرورة أن الشخص يتعمد التضليل. والاحتمال يعبّر عن درجة عدم اليقين ولا يساوي ضماناً.',
+      'الموافقة اختيار واضح ومحدد، ولا يعني القبول بأمر الموافقة على أمور أخرى لم تُذكر. والتفويض في الأمن السيبراني يحدد من يملك الإذن وما الأنظمة والمدة والأنشطة المسموح بها.'
+    ]));
+
+    sections.push(articleSection('article-summary','22 • الخلاصة المتقدمة','ما الذي ينبغي أن يبقى معك بعد القراءة؟',[
+      'المعرفة الحقيقية لا تمنحك قدرة خارقة على قراءة الآخرين، لكنها تمنحك أدوات أفضل لقراءة الوقائع والتمييز بين الادعاء والدليل، وملاحظة الضغط، وطرح أسئلة واضحة.',
+      'أهم قاعدة هي أن حقك في التفكير والمراجعة والرفض لا يحتاج إلى إثبات. وفي الجانب التقني، لا تختبر خارج نطاق التفويض ولا تعرض بياناتك الحقيقية لخطر غير ضروري.',
+      'ارجع إلى هذا الملف عند الحاجة، وقارن ما تعلمته بمصادر مستقلة. غيّر رأيك عندما تظهر معلومات أقوى، واطلب الدعم عندما يصبح الموقف أكبر من قدرتك على التعامل معه وحدك.'
+    ]));
+
+    const toc = sections.map((section, i) => {
+      const found = section.match(/id="([^"]+)"/);
+      const heading = section.match(/<h2>([\s\S]*?)<\/h2>/);
+      return '<a href="#' + (found ? found[1] : '') + '"><span>' + String(i + 1).padStart(2, '0') + '</span>' + (heading ? heading[1] : '') + '</a>';
+    }).join('');
+
+    let parentRoute = type === 'lesson' ? 'learn' : type === 'pattern' ? 'spot' : type === 'protocol' ? 'protocol' : type === 'cyber' ? 'cyber' : 'library';
+    let relatedLinks = '';
+    if (type === 'lesson') relatedLinks = lessons.filter(x => x.id !== d.id).slice(0,4).map(x => '<a href="#lesson/' + x.id + '">' + x.title + ' ↗</a>').join('');
+    if (type === 'pattern') relatedLinks = patterns.map((x,i)=>({x,i})).filter(y=>y.i!==Number(id)).slice(0,4).map(y=>'<a href="#pattern/'+y.i+'">'+y.x.title+' ↗</a>').join('');
+    if (type === 'protocol') relatedLinks = protocolTechniques.filter(x => x.id !== item.id).slice(0,4).map(x => '<a href="#protocol/' + x.id + '">' + x.title + ' ↗</a>').join('');
+    if (type === 'cyber') relatedLinks = cyberModules.map((x,i)=>({x,i})).filter(y=>y.i!==Number(id)).slice(0,4).map(y=>'<a href="#cyber/'+y.i+'">'+y.x.title+' ↗</a>').join('');
+    if (type === 'book') relatedLinks = books.map((x,i)=>({x,i})).filter(y=>y.i!==Number(id)).slice(0,4).map(y=>'<a href="#book/'+y.i+'">'+y.x.title+' ↗</a>').join('');
+
+    return '<div class="long-article-page">' +
+      '<div class="article-breadcrumb"><a href="#' + parentRoute + '">← العودة إلى ' + (pageNames[parentRoute] || 'الفهرس') + '</a><span>/</span><span>' + d.category + '</span></div>' +
+      '<header class="long-article-hero"><div class="article-hero-ornament" aria-hidden="true">◉</div><div class="eyebrow">ملف موسوعي مستقل • قراءة معمقة</div><div class="long-article-category">' + d.category + '</div><h1>' + d.title + '</h1><p>' + d.intro + '</p><div class="long-article-meta"><span>22 فصلاً تفصيلياً</span><span>أمثلة وتطبيقات</span><span>مراجعة ومراجع</span></div><div class="article-share-row"><button class="secondary-btn" data-copy-url>انسخ رابط الدرس ↗</button><button class="secondary-btn" onclick="window.print()">طباعة / حفظ PDF</button></div></header>' +
+      '<div class="long-article-layout"><aside class="article-toc"><div class="article-toc-head">فهرس القراءة <small>22 قسماً</small></div>' + toc + '</aside><article class="long-article-body">' + sections.join('') +
+      '<div class="article-related"><h2>تابع القراءة</h2>' + relatedLinks + '</div>' +
+      '<div class="article-bottom-note"><strong>الظِّل • المعرفة بداية الوعي</strong><p>هذه المادة تعليمية وليست تشخيصاً أو بديلاً عن المساعدة المتخصصة. عند وجود خطر مباشر، أعطِ الأولوية للسلامة والدعم المناسب.</p></div></article></div></div>';
+  }
+
+  function renderRoute() {
+    const route = (location.hash || '#home').slice(1).split('/');
+    const group = route[0] || 'home';
+    const id = route[1];
+    let html = '';
+    let activeNav = group;
+    let label = pageNames[group] || pageNames.home;
+
+    if (group === 'lesson') {
+      const item = lessons.find(x => x.id === id);
+      if (item) { html = buildLongArticle('lesson', item, id); activeNav = 'learn'; label = item.title; }
+    } else if (group === 'pattern') {
+      const item = patterns[Number(id)];
+      if (item) { html = buildLongArticle('pattern', item, id); activeNav = 'spot'; label = item.title; }
+    } else if (group === 'protocol') {
+      const item = protocolTechniques.find(x => x.id === Number(id));
+      if (item) { html = buildLongArticle('protocol', item, id); activeNav = 'protocol'; label = item.title; }
+    } else if (group === 'cyber') {
+      const item = cyberModules[Number(id)];
+      if (item) { html = buildLongArticle('cyber', item, id); activeNav = 'cyber'; label = item.title; }
+    } else if (group === 'book') {
+      const item = books[Number(id)];
+      if (item) { html = buildLongArticle('book', item, id); activeNav = 'library'; label = item.title; }
+    }
+
+    if (!html) {
+      const renderer = renderers[group] || renderers.home;
+      html = renderer();
+      activeNav = renderers[group] ? group : 'home';
+      label = pageNames[activeNav] || pageNames.home;
+    }
+    currentPage = activeNav;
+    pageContent.innerHTML = html;
+    pageLabel.textContent = label;
+    $('.nav-item[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === activeNav));
+    sidebar.classList.remove('open');
+    $('#mobileOverlay').classList.remove('show');
+    if (activeNav === 'notes' && $('#userNotes')) $('#userNotes').value = localStorage.getItem('darkBookNotes') || '';
+    pageContent.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   const renderers = {
     home: homePage,
     learn: learnPage,
@@ -1158,16 +1462,9 @@
   };
 
   function navigate(page) {
-    if (!renderers[page]) page = 'home';
-    currentPage = page;
-    pageContent.innerHTML = renderers[page]();
-    pageLabel.textContent = pageNames[page];
-    $$('.nav-item[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === page));
-    sidebar.classList.remove('open');
-    $('#mobileOverlay').classList.remove('show');
-    if (page === 'notes') $('#userNotes').value = localStorage.getItem('darkBookNotes') || '';
-    pageContent.focus({ preventScroll: true });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const target = '#' + page;
+    if (location.hash !== target) location.hash = target;
+    else renderRoute();
   }
 
   function openModal(html) {
@@ -1205,8 +1502,14 @@
     patterns.forEach((item, i) => {
       if ((item.title + item.tag + item.desc).toLowerCase().includes(term)) items.push({ title: item.title, desc: 'نمط سلوكي • توعية وحماية', page: 'spot', key: i });
     });
-    books.forEach(item => {
-      if ((item.title + item.author + item.category).toLowerCase().includes(term)) items.push({ title: item.title, desc: item.author + ' • كتاب', page: 'library' });
+    books.forEach((item, index) => {
+      if ((item.title + item.author + item.category).toLowerCase().includes(term)) items.push({ title: item.title, desc: item.author + ' • صفحة كتاب مستقلة', page: 'book', key: index });
+    });
+    protocolTechniques.forEach(item => {
+      if ((item.title + item.definition + item.research).toLowerCase().includes(term)) items.push({ title: item.title, desc: 'ملف تأثير نفسي • صفحة مستقلة', page: 'protocol-item', key: item.id });
+    });
+    cyberModules.forEach((item, index) => {
+      if ((item.title + item.intro + item.lessons.join(' ')).toLowerCase().includes(term)) items.push({ title: item.title, desc: 'درس أمن سيبراني • صفحة مستقلة', page: 'cyber-item', key: index });
     });
     if (!items.length) {
       result.innerHTML = '<div class="empty-state">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو مرادفاً أبسط.</div>';
@@ -1225,6 +1528,22 @@
   }
 
   function handleClick(event) {
+    if (event.target.closest('[data-copy-url]')) {
+      const url = location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => showToast('تم نسخ رابط الدرس.')).catch(() => showToast(url));
+      } else showToast(url);
+      return;
+    }
+    if (event.target.closest('[data-save-exercise]')) {
+      const field = $('#articleExercise');
+      if (!field || !field.value.trim()) { showToast('اكتب ملاحظتك أولاً.'); return; }
+      const saved = localStorage.getItem('darkBookNotes') || '';
+      localStorage.setItem('darkBookNotes', saved + '\n\n' + field.value.trim());
+      const status = $('#articleExerciseStatus');
+      if (status) status.textContent = 'تم حفظ التمرين في دفتر التأمل على هذا الجهاز.';
+      return;
+    }
     const go = event.target.closest('[data-go]');
     if (go) return navigate(go.dataset.go);
     const nav = event.target.closest('[data-page]');
@@ -1357,12 +1676,12 @@
     if (searchResult) {
       const item = $('#searchResults')._items[Number(searchResult.dataset.searchIndex)];
       closeModal();
-      navigate(item.page);
-      if (item.page === 'learn' && item.key) {
-        const card = $('[data-lesson-card="' + item.key + '"]');
-        if (card) { card.classList.add('open'); $('[data-lesson="' + item.key + '"]').textContent = 'إغلاق الدرس ↑'; }
-      }
-      if (item.page === 'spot' && item.key !== undefined) openPattern(Number(item.key));
+      if (item.page === 'learn' && item.key) location.hash = '#lesson/' + item.key;
+      else if (item.page === 'spot' && item.key !== undefined) location.hash = '#pattern/' + item.key;
+      else if (item.page === 'book') location.hash = '#book/' + item.key;
+      else if (item.page === 'protocol-item') location.hash = '#protocol/' + item.key;
+      else if (item.page === 'cyber-item') location.hash = '#cyber/' + item.key;
+      else navigate(item.page);
       return;
     }
   }
@@ -1378,6 +1697,7 @@
   document.addEventListener('change', event => {
     if (event.target && event.target.id === 'protocolPhase') updateProtocolResults();
   });
+  window.addEventListener('hashchange', renderRoute);
   $('#searchOpen').addEventListener('click', openSearch);
   $('#modalClose').addEventListener('click', closeModal);
   modalBackdrop.addEventListener('click', event => { if (event.target === modalBackdrop) closeModal(); });
@@ -1400,7 +1720,66 @@
     if (event.key === 'Escape') closeModal();
   });
 
-  navigate('home');
+  if (location.hash) renderRoute(); else navigate('home');
+  const smokeOrbit = document.createElement('div');
+  smokeOrbit.className = 'smoke-orbit';
+  smokeOrbit.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(smokeOrbit);
+  let activeSmokeTarget = null;
+
+  function smokeTargetFor(node) {
+    if (!node || !node.closest) return null;
+    return node.closest('button,a,summary,h1,h2,h3,.content-card,.panel,.stat-card,.protocol-stage,.cyber-lab-card,.book-reader-cover,.long-article-section');
+  }
+
+  function updateSmokeTarget(target) {
+    if (!target || !target.getBoundingClientRect) return;
+    activeSmokeTarget = target;
+    const rect = target.getBoundingClientRect();
+    smokeOrbit.style.left = Math.max(0, rect.left - 10) + 'px';
+    smokeOrbit.style.top = Math.max(0, rect.top - 8) + 'px';
+    smokeOrbit.style.width = Math.max(30, rect.width + 20) + 'px';
+    smokeOrbit.style.height = Math.max(24, rect.height + 16) + 'px';
+    smokeOrbit.classList.add('visible');
+  }
+
+  document.addEventListener('pointerover', event => {
+    if (event.pointerType === 'touch') return;
+    const target = smokeTargetFor(event.target);
+    if (target) updateSmokeTarget(target);
+    else { smokeOrbit.classList.remove('visible'); activeSmokeTarget = null; }
+  });
+
+  document.addEventListener('pointermove', event => {
+    if (event.pointerType === 'touch') return;
+    if (activeSmokeTarget && document.body.contains(activeSmokeTarget)) {
+      const rect = activeSmokeTarget.getBoundingClientRect();
+      if (event.clientX < rect.left - 18 || event.clientX > rect.right + 18 ||
+          event.clientY < rect.top - 18 || event.clientY > rect.bottom + 18) {
+        smokeOrbit.classList.remove('visible');
+        activeSmokeTarget = null;
+      } else {
+        updateSmokeTarget(activeSmokeTarget);
+        smokeOrbit.style.setProperty('--smoke-x', (event.clientX - rect.left) + 'px');
+        smokeOrbit.style.setProperty('--smoke-y', (event.clientY - rect.top) + 'px');
+      }
+    }
+    const pupil = $('#shadowPupil');
+    if (pupil) {
+      const dx = ((event.clientX / Math.max(window.innerWidth, 1)) - .5) * 18;
+      const dy = ((event.clientY / Math.max(window.innerHeight, 1)) - .5) * 7;
+      pupil.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)';
+    }
+  }, { passive: true });
+
+  window.addEventListener('scroll', () => {
+    if (activeSmokeTarget && document.body.contains(activeSmokeTarget)) updateSmokeTarget(activeSmokeTarget);
+  }, { passive: true });
+  window.addEventListener('resize', () => {
+    if (activeSmokeTarget && document.body.contains(activeSmokeTarget)) updateSmokeTarget(activeSmokeTarget);
+  });
+
+
 
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
