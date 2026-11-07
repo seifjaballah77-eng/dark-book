@@ -240,13 +240,7 @@
   }
 
   function eyeArt() {
-    return '<svg class="eye-art" viewBox="0 0 430 250" role="img" aria-label="عين رمزية وسط الظلال">' +
-      '<path class="eye-ring" d="M30 125C83 28 152 12 215 12s132 16 185 113c-53 97-122 113-185 113S83 222 30 125Z"/>' +
-      '<path d="M65 125c43-57 93-82 150-82s107 25 150 82c-43 57-93 82-150 82S108 182 65 125Z" fill="#09070d" stroke="#9a56c8" stroke-width="2"/>' +
-      '<ellipse class="eye-iris" cx="215" cy="125" rx="50" ry="54"/><ellipse class="eye-pupil" cx="215" cy="125" rx="17" ry="34"/><circle class="eye-glint" cx="198" cy="104" r="6"/>' +
-      '<path d="M75 125c36-55 85-77 140-77s104 22 140 77" fill="none" stroke="#d1a1f2" stroke-width="1" opacity=".24"/>' +
-      '<path d="M88 149c37 40 78 58 127 58s90-18 127-58" fill="none" stroke="#6a3b87" stroke-width="2" opacity=".6"/>' +
-      '</svg>';
+    return '<img class="eye-art" src="./assets/hidden-eye.svg" alt="">';
   }
 
   function heroArt() {
@@ -497,6 +491,10 @@
     if (quizOption) {
       selectedQuiz = Number(quizOption.dataset.quizOption);
       $$('.quiz-option').forEach((button, i) => button.classList.toggle('selected', i === selectedQuiz));
+      const q = quiz[quizIndex];
+      const explain = $('#quizExplain');
+      explain.style.display = 'block';
+      explain.textContent = (selectedQuiz === q.correct ? 'إجابة صحيحة. ' : 'ليست الإجابة الأدق. ') + q.explain;
       const next = $('#quizNext');
       next.disabled = false;
       next.style.opacity = '1';
@@ -508,16 +506,9 @@
       if (selectedQuiz === null) return;
       const q = quiz[quizIndex];
       if (selectedQuiz === q.correct) quizScore++;
-      const explain = $('#quizExplain');
-      explain.style.display = 'block';
-      explain.textContent = q.explain;
       quizIndex++;
       selectedQuiz = null;
-      const next = $('#quizNext');
-      next.textContent = quizIndex >= quiz.length ? 'عرض النتيجة' : 'متابعة';
-      next.onclick = function () { navigate('quiz'); };
-      if (quizIndex >= quiz.length) next.onclick = function () { navigate('quiz'); };
-      return;
+      return navigate('quiz');
     }
 
     if (event.target.closest('[data-restart-quiz]')) {
