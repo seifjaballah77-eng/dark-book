@@ -1,0 +1,8 @@
+{
+"name":"الظِّل — موسوعة علم النفس",
+"short_name":"الظِّل",
+"description":"موسوعة تفاعلية لفهم السلوك البشري وكشف التلاعب وبناء الوعي.",
+"lang":"ar","dir":"rtl","start_url":"./","scope":"./","display":"standalone",
+"background_color":"#07070b","theme_color":"#07070b",
+"icons":[{"src":"./assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
