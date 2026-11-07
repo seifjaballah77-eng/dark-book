@@ -323,3 +323,14 @@ body:after{content:"";position:fixed;inset:-12%;z-index:0;pointer-events:none;op
   .long-article-section>p,.article-rich-list li,.protocol-card summary,.cyber-module summary,.book-index-item{transition:color .2s ease}
   .long-article-section>p:hover,.article-rich-list li:hover{color:#e3d9e3}
 }
+
+
+.article-chapter-links{display:grid;gap:7px;margin-top:13px}
+.article-chapter-links a{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid rgba(177,48,72,.17);border-radius:9px;background:rgba(84,9,29,.1);color:#c9a1ac;text-decoration:none;font-size:9px;transition:.2s}
+.article-chapter-links a span{font:9px Arial;color:#cb5a74}
+.article-chapter-links a:hover{border-color:rgba(205,76,103,.55);background:rgba(95,11,34,.2);color:#fff}
+.article-source-card{padding:15px 17px;margin-top:23px;border:1px solid rgba(169,75,94,.2);border-radius:11px;background:linear-gradient(110deg,rgba(73,12,28,.15),rgba(16,13,20,.8))}
+.article-source-card strong{display:block;font-size:9px;color:#d9a2af;margin-bottom:8px}
+.article-source-card a{font-size:9px;color:#dca1b0;text-decoration:none;line-height:2}
+.article-source-card a:hover{color:#fff;text-decoration:underline}
+.article-source-card p{font-size:9px;color:#968b98;line-height:2;margin:0}
