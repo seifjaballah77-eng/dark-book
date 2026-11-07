@@ -309,3 +309,17 @@ body:after{content:"";position:fixed;inset:-12%;z-index:0;pointer-events:none;op
 @media(max-width:560px){.long-article-hero{padding:23px 19px}.long-article-hero h1{font-size:24px}.article-hero-ornament{left:10px;font-size:65px}.long-article-body{padding:4px 13px 16px}.long-article-section{padding:22px 1px}.long-article-section h2{font-size:14px}.long-article-section p{font-size:10px;line-height:2.25}.article-summary-strip{grid-template-columns:1fr}.article-share-row button{flex:1}.article-toc{padding:10px}.article-toc a{padding:7px 4px}}
 @media(hover:none),(prefers-reduced-motion:reduce){.smoke-orbit{display:none}.shadow-eye #shadowPupil{transition:none}}
 @media print{.sidebar,.topbar,.page-footer,.article-toc,.article-share-row,.smoke-orbit{display:none!important}.main-area{margin:0}.page-content{padding:0}.long-article-layout{display:block}.long-article-body{border:0;box-shadow:none;background:#fff;color:#111}.long-article-section p,.article-rich-list li{color:#222}.long-article-hero{background:#fff;color:#111;border:1px solid #aaa}.long-article-hero h1,.long-article-section h2{color:#111}.long-article-hero>p{color:#333}}
+
+
+/* Final hover polish for article links and dark smoke */
+.protocol-full-link{display:inline-flex;align-items:center;margin:13px 0 2px;padding:8px 11px;border:1px solid rgba(181,53,78,.27);border-radius:8px;background:rgba(94,10,31,.13);color:#d88b9e;text-decoration:none;font-size:8px;transition:.2s}
+.protocol-full-link:hover{border-color:rgba(216,81,111,.62);background:rgba(107,13,37,.24);color:#fff}
+.book-index-item:hover,.book-index-item.active{text-decoration:none}
+.smoke-orbit:before{mix-blend-mode:normal;opacity:.88}
+.smoke-orbit:after{opacity:.72}
+.long-article-section>p:hover{color:#ded5df;text-shadow:0 0 18px rgba(0,0,0,.8)}
+.lesson-open-link:hover,.cyber-full-link:hover,.book-full-link:hover,.protocol-full-link:hover{text-shadow:0 0 14px rgba(196,73,103,.45)}
+@media(hover:hover) and (pointer:fine){
+  .long-article-section>p,.article-rich-list li,.protocol-card summary,.cyber-module summary,.book-index-item{transition:color .2s ease}
+  .long-article-section>p:hover,.article-rich-list li:hover{color:#e3d9e3}
+}
