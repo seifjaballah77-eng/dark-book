@@ -1417,6 +1417,7 @@
       '<div class="article-breadcrumb"><a href="#' + parentRoute + '">← العودة إلى ' + (parentRoute.startsWith('book/') ? 'صفحة الكتاب' : (pageNames[parentRoute] || 'الفهرس')) + '</a><span>/</span><span>' + d.category + '</span></div>' +
       '<header class="long-article-hero"><div class="article-hero-ornament" aria-hidden="true">◉</div><div class="eyebrow">ملف موسوعي مستقل • قراءة معمقة</div><div class="long-article-category">' + d.category + '</div><h1>' + d.title + '</h1><p>' + d.intro + '</p><div class="long-article-meta"><span>22 فصلاً تفصيلياً</span><span>أمثلة وتطبيقات</span><span>مراجعة ومراجع</span></div><div class="article-share-row"><button class="secondary-btn" data-copy-url>انسخ رابط الدرس ↗</button><button class="secondary-btn" onclick="window.print()">طباعة / حفظ PDF</button></div></header>' +
       '<div class="long-article-layout"><aside class="article-toc"><div class="article-toc-head">فهرس القراءة <small>22 قسماً</small></div>' + toc + '</aside><article class="long-article-body">' + sections.join('') +
+      (type === 'protocol' ? '<div class="article-source-card"><strong>المصدر الذي استند إليه هذا الملف</strong><a href="' + item.url + '" target="_blank" rel="noopener noreferrer">' + articleEsc(item.source) + ' ↗</a></div>' : (type === 'book' || type === 'bookchapter' ? '<div class="article-source-card"><strong>مرجع القراءة</strong><p>' + articleEsc(d.reference) + ' — هذه ملاحظات تفسيرية من إعداد الموسوعة وليست نقلاً حرفياً من الكتاب.</p></div>' : '')) +
       '<div class="article-related"><h2>تابع القراءة</h2>' + relatedLinks + '</div>' +
       '<div class="article-bottom-note"><strong>الظِّل • المعرفة بداية الوعي</strong><p>هذه المادة تعليمية وليست تشخيصاً أو بديلاً عن المساعدة المتخصصة. عند وجود خطر مباشر، أعطِ الأولوية للسلامة والدعم المناسب.</p></div></article></div></div>';
   }
@@ -1537,6 +1538,13 @@
     });
     books.forEach((item, index) => {
       if ((item.title + item.author + item.category).toLowerCase().includes(term)) items.push({ title: item.title, desc: item.author + ' • صفحة كتاب مستقلة', page: 'book', key: index });
+    });
+    books.forEach((book, bookIndex) => {
+      book.chapters.forEach((chapter, chapterIndex) => {
+        if ((chapter.title + chapter.intro + chapter.example + chapter.reflect).toLowerCase().includes(term)) {
+          items.push({ title: chapter.title, desc: book.title + ' • فصل مستقل', page: 'book-chapter', key: bookIndex + '/' + chapterIndex });
+        }
+      });
     });
     protocolTechniques.forEach(item => {
       if ((item.title + item.definition + item.research).toLowerCase().includes(term)) items.push({ title: item.title, desc: 'ملف تأثير نفسي • صفحة مستقلة', page: 'protocol-item', key: item.id });
@@ -1712,6 +1720,7 @@
       if (item.page === 'learn' && item.key) location.hash = '#lesson/' + item.key;
       else if (item.page === 'spot' && item.key !== undefined) location.hash = '#pattern/' + item.key;
       else if (item.page === 'book') location.hash = '#book/' + item.key;
+      else if (item.page === 'book-chapter') location.hash = '#book/' + item.key.replace('/', '/chapter/');
       else if (item.page === 'protocol-item') location.hash = '#protocol/' + item.key;
       else if (item.page === 'cyber-item') location.hash = '#cyber/' + item.key;
       else navigate(item.page);
