@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260">
+<defs><radialGradient id="iris"><stop stop-color="#f4d9ff"/><stop offset=".18" stop-color="#b45cff"/><stop offset=".65" stop-color="#34134d"/><stop offset="1" stop-color="#09070d"/></radialGradient></defs>
+<path d="M20 130C79 28 156 12 240 12s161 16 220 118c-59 102-136 118-220 118S79 232 20 130Z" fill="#09070d" stroke="#a855f7" stroke-opacity=".6" stroke-width="2"/>
+<path d="M73 130c47-58 103-83 167-83s120 25 167 83c-47 58-103 83-167 83S120 188 73 130Z" fill="#120d1a" stroke="#d3a0f4" stroke-opacity=".7" stroke-width="2"/>
+<ellipse cx="240" cy="130" rx="53" ry="58" fill="url(#iris)" stroke="#d5a3f7" stroke-width="2"/><ellipse cx="240" cy="130" rx="17" ry="38" fill="#030207"/><circle cx="221" cy="105" r="7" fill="#fff" opacity=".85"/>
+<path d="M92 130c39-39 89-60 148-60s109 21 148 60" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="2"/>
+</svg>
