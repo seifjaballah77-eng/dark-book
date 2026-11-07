@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 220">
+<defs><radialGradient id="glow"><stop stop-color="#a855f7" stop-opacity=".7"/><stop offset="1" stop-color="#a855f7" stop-opacity="0"/></radialGradient><linearGradient id="flame" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5b287b"/><stop offset=".48" stop-color="#170f22"/><stop offset="1" stop-color="#050507"/></linearGradient><linearGradient id="inner" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f4c7ff"/><stop offset=".42" stop-color="#b45cff"/><stop offset="1" stop-color="#35134d"/></linearGradient></defs>
+<ellipse cx="90" cy="178" rx="76" ry="35" fill="url(#glow)"/>
+<path d="M91 14c9 33-5 40 15 62 9 10 20 14 24 31 9 36-12 72-42 77-34 5-62-19-59-54 2-23 22-34 25-57 13 11 14 24 12 35 22-21 15-55 25-94Z" fill="url(#flame)" stroke="#9b53c9" stroke-opacity=".65" stroke-width="2"/>
+<path d="M91 83c2 20 23 27 20 51-2 17-11 29-25 31-18 2-31-12-29-29 2-14 14-21 18-38 7 7 8 13 7 20 8-10 5-22 9-35Z" fill="url(#inner)" opacity=".82"/>
+<path d="M90 122c9 11 7 24-2 31-8 6-18 1-18-8 0-8 9-13 13-23 2 4 3 7 2 10 4-3 3-7 5-10Z" fill="#f2dcff" opacity=".72"/>
+</svg>
