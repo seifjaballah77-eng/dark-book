@@ -1771,17 +1771,17 @@
 
   function smokeTargetFor(node) {
     if (!node || !node.closest) return null;
-    return node.closest('button,a,summary,h1,h2,h3,p,li,.content-card,.panel,.stat-card,.protocol-stage,.cyber-lab-card,.book-reader-cover,.long-article-section');
+    return node.closest('button');
   }
 
   function updateSmokeTarget(target) {
     if (!target || !target.getBoundingClientRect) return;
     activeSmokeTarget = target;
     const rect = target.getBoundingClientRect();
-    smokeOrbit.style.left = Math.max(0, rect.left - 10) + 'px';
-    smokeOrbit.style.top = Math.max(0, rect.top - 8) + 'px';
-    smokeOrbit.style.width = Math.max(30, rect.width + 20) + 'px';
-    smokeOrbit.style.height = Math.max(24, rect.height + 16) + 'px';
+    smokeOrbit.style.left = Math.max(0, rect.left - 4) + 'px';
+    smokeOrbit.style.top = Math.max(0, rect.top - 4) + 'px';
+    smokeOrbit.style.width = Math.max(30, rect.width + 8) + 'px';
+    smokeOrbit.style.height = Math.max(24, rect.height + 8) + 'px';
     smokeOrbit.classList.add('visible');
   }
 
